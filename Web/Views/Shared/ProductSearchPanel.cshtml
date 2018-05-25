@@ -1,0 +1,47 @@
+﻿@model LightStore.Models.ProductSearch
+
+<head>
+    <link href="~/Content/Bootstrap/css/bootstrap-slider.css" rel="stylesheet" />
+    <script src="~/Content/Scripts/GetSetSession.js"></script>
+    <script src="~/Content/Bootstrap/js/bootstrap-slider.js"></script>
+</head>
+
+<div class="col-sm-6 col-xs-12">
+    <div class="row clearfix">
+        <div class="col-sm-4 col-xs-12" style="margin-top: 3px">
+            @Html.Label("Title")
+        </div>
+        <div class="col-sm-8 col-xs-12" style="margin-bottom: 2px; margin-top: 3px">
+            @Html.TextBoxFor(model => model.Title, new { @class = "form-control" })
+        </div>
+    </div>
+
+    <div class="row clearfix">
+        <div class="col-sm-4 col-xs-12" style="margin-top: 3px;">
+            @Html.Label("Max Price")
+        </div>
+        <div class="col-sm-8 col-xs-12" style="margin-bottom: 2px; margin-top: 3px;">
+            @Html.TextBoxFor(model => model.MaxPrice, new { @class = "form-control"})
+        </div>
+    </div>
+</div>
+
+<div class="col-sm-6 col-xs-12">
+    <div class="row clearfix">
+        <div class="col-sm-4 col-xs-12" style="margin-top: 3px">
+        </div>
+        <div class="col-sm-8 col-xs-12" style="margin-bottom: 2px; margin-top: 3px">
+            @Html.EditorFor(model => model.OnlyRecommended)
+            @Html.Label("Only Recommended")
+        </div>
+    </div>
+    
+    <div class="row clearfix">
+        <div class="col-sm-4 col-xs-12" style="margin-top: 3px">
+        </div>
+        <div class="col-sm-8 col-xs-12" style="margin-bottom: 2px; margin-top: 3px">
+            @Html.EditorFor(model => model.OnlyDiscounted)
+            @Html.Label("Only Discounted")
+        </div>
+    </div>
+</div>

@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="LightStore.Account" Collapsed="true">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAACAAQAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Account.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LightStore.Models.Category">
+    <Position X="3" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAgAAQAAgAAAAAAAgAAAAAQAAA=</HashCode>
+      <FileName>Category.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LightStore.Models.Customer">
+    <Position X="5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAIAAAACAAAAAAAAAAACAAAAAAAAAAA=</HashCode>
+      <FileName>Customer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LightStore.Models.Product">
+    <Position X="7" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAADQAgAEIAAAAiAEBAAAAAAAAAAgAEiEAACAA=</HashCode>
+      <FileName>Product.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LightStore.Models.ProductSearch">
+    <Position X="9" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAAAAAAAAAAAAEAAAAAAAAAABAAAAAAAARAABgAAAAA=</HashCode>
+      <FileName>ProductSearch.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LightStore.Models.Receipt">
+    <Position X="10.5" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAQAAAAAEAAAAAAAAAAAQABAAAAAAAAAQA=</HashCode>
+      <FileName>Receipt.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LightStore.Models.SelectedProduct">
+    <Position X="7.75" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAECAAAEAAAAAAAIAAQAAAAAAAAAAAAAAAAAACAAAAA=</HashCode>
+      <FileName>SelectedProduct.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LightStore.Models.CategoryViewModel">
+    <Position X="5.5" Y="7.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAIAAgAAQAAAAAAAAAAAAAAAAQAAA=</HashCode>
+      <FileName>ViewModel\EditCategoryViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LightStore.Models.EditProductViewModel">
+    <Position X="8.25" Y="8.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAABQAgAEAAAAAgAEBAACAAAAAAAhAAgEAQAAA=</HashCode>
+      <FileName>ViewModel\EditProductViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Enum Name="LightStore.Models.Color">
+    <Position X="3" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAGAAAAAAAAIgAAAAAAAAAABAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Product.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="LightStore.Models.SelectedProductStatus">
+    <Position X="4" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAI=</HashCode>
+      <FileName>SelectedProductStatus.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

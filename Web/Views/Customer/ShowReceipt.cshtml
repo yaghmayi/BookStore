@@ -1,0 +1,40 @@
+﻿@using LightStore.DataAccess
+@using LightStore.Models
+@using LightStore.Web
+@using LightStore.Web.Security
+@model LightStore.Models.Receipt
+
+@{
+    ViewBag.Title = "FinishShop";
+}
+
+<html>
+    <head>
+        <link href="~/Content/Site.css" rel="stylesheet" />
+    </head>
+
+    <form method="POST">
+        <div class="container">
+            <div class="col-xs-6 well">
+                @{
+                    string message = "Your payment has been done succeffuly." + "<br/>" + "The receipt number: <b>" + @Model.Number + "</b>";
+                }
+                
+                @if (AuthorizeHelper.GetCurrentUser() != null)
+                {
+                    message += "<br/>" + "The receipt was laso sent to your email.";
+                }
+                
+                @LightStotreHtmHelper.DisplayMessage(message)
+            </div>
+        
+            <div class="col-xs-12">
+                @Html.ActionLink("Return", "ListProducts", "Product", new { categoryCode = 4 }, null)
+            </div>
+        </div>
+       
+    </form>
+
+</html>
+
+

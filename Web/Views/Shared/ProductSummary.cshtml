@@ -1,0 +1,57 @@
+﻿@using LightStore.Web
+@using LightStore.Web.Security
+@model LightStore.Models.Product
+
+<head>
+    <script src="~/Content/Scripts/GetSetSession.js"></script>
+    <script src="~/Content/Scripts/AddShopItem.js"></script>
+</head>
+
+<div class="col-md-4 col-sm-6 col-xs-12 well">
+    <div style="float: left; width: 50%">
+        <img src="/Product/ShowPhoto/@Model.Code" style="height: 100px;" />
+    </div>
+    <div style="float: left; width: 50%;" align="right">
+        @if (Model.IsRecommended)
+        {
+            <img src="../../Content/Images/Recommended.png" />
+        }
+    </div>
+    
+    <div style="height: 2px"></div>
+
+    <div style="clear: both">
+        @LightStotreHtmHelper.DisplayColors(@Model.Colors)
+    </div>
+
+    <div style="padding-top: 5px">
+        <h5>
+            @Html.ActionLink(Model.Title, "ShowProduct", new { id = @Model.Code })
+        </h5>
+    </div>
+
+    <div>
+        @LightStotreHtmHelper.DisplayPrice(@Model.Price, @Model.Discount)
+    </div>
+
+    <div style="padding-top: 2px">
+        <button type="button" class="btn btn-default" data-toggle="modal" data-target=".bs-example-modal-sm" onclick="AddShopItem(@Model.Code)">
+            Add
+        </button>
+        <span id="@LightStotreHtmHelper.Contact("prg", @Model.Code.ToString())" style="display: none">
+            <b>Added</b>
+        </span>
+    </div>
+
+    <div>
+        @{
+            if (AuthorizeHelper.IsCurrentUserAdmin())
+            {
+                @Html.ActionLink("Edit", "EditProduct", new { id = @Model.Code })
+                @Html.Label(" | ")
+                @Html.ActionLink("Delete", "DeleteProduct", new { id = @Model.Code })
+            }
+        }
+    </div>
+</div>
+

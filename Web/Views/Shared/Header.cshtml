@@ -1,0 +1,121 @@
+﻿@using LightStore.DataAccess
+@using LightStore.Models
+@using LightStore.Web
+@using LightStore.Web.Security
+
+<html>
+    <head>
+        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+@*        <link href="~/Content/Bootstrap/css/bootstrap-theme.css" rel="stylesheet" />*@
+@*        <link href="~/Content/Bootstrap/css/bootstrap.css" rel="stylesheet" />*@
+@*        <link href="~/Content/Bootstrap/css/CircleButtons.css" rel="stylesheet" />*@
+        <script src="~/Content/Scripts/GetSetSession.js"></script>
+        <script src="~/Content/Scripts/LoadShopItemsCount.js"></script>
+    </head>
+
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header" style="margin-left: 5px">
+                <span style="font-size: xx-large; color: white;">
+                    Light Store
+                </span>
+            </div>
+            <div>
+                <ul class="nav navbar-nav">
+                    <li>
+                        <span class="input-group" style="max-width: 400px; margin-top: 5px; margin-left: 5px">
+                            <input id="address" type="text" placeholder="Product Title" class="form-control">
+                            <span class="input-group-btn">
+                                <button class="btn btn-default" type="button" id="addressSearch">
+                                    <i class="glyphicon glyphicon-search"></i>
+                                </button>
+                            </span>
+                        </span>
+                    </li>
+
+                    @{
+                        List<Category> categories = CategoryDAO.GetAll();
+                        foreach (Category category in categories)
+                        {
+                            <li class="dropdown">
+                                <a style="margin-left: 5px" class="dropdown-toggle" data-toggle="dropdown">
+                                    @category.Name
+                                    <span class="caret"></span>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    @foreach (Category subCategory in category.SubCategories)
+                                    {
+                                        <li>
+                                            <a href="/Product/ListProducts?CategoryCode=@subCategory.Code">@subCategory.Name</a>
+                                        </li>
+                                    }
+                                </ul>
+                            </li>
+                        }
+
+                        if (AuthorizeHelper.IsCurrentUserAdmin())
+                        {
+
+                            <li style="color: lightblue">
+                                <a href="/Product/ListCategories" style="color: lightblue">(List Categories)</a>
+@*                                @Html.ActionLink("List Categories", "ListCategories", null, null)*@
+                            </li>
+                        }
+                    }
+                </ul>
+
+                <ul class="nav navbar-nav navbar-right">
+                    @if (Session[DataKeys.User] != null)
+                    {
+                        Customer customer = (Customer)Session[DataKeys.User];
+                        
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown">
+                                <span class="glyphicon glyphicon-user"></span>
+                                @customer.Email
+                                <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a href="/Customer/Logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a>
+                                </li>
+                            </ul>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" href="#" data-toggle="dropdown" id="navSignUp">
+                                <span class="glyphicon glyphicon-user"></span> Sign Up
+                            </a>
+                            <div class="dropdown-menu" style="padding:17px;">
+                                @Html.Partial("SignUp")
+                            </div>
+                        </li>
+
+                        <li class="dropdown" id="menuLogin">
+                            <a class="dropdown-toggle"1 href="#" data-toggle="dropdown" id="navLogin">
+                                <span class="glyphicon glyphicon-log-in"></span> Login
+                            </a>
+                            <div class="dropdown-menu" style="padding:17px;">
+                                @Html.Partial("Login")
+                            </div>
+                        </li>
+                    }
+
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" href="/Customer/ShopList" id="navLogin">
+                            <span class="glyphicon glyphicon-shopping-cart"></span> Buy
+                            <span id="shopItemsCount" style="color: greenyellow; font-weight: bold; font-size: large"></span>
+                            <script type="text/javascript">
+                                LoadShopItesmCount();
+                            </script>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</html>

@@ -1,0 +1,23 @@
+﻿@using LightStore.Models
+@using LightStore.Web
+<!DOCTYPE html>
+<html>
+    <head>
+        <link href="../../Content/Bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+        <script src="../../Content/Bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+    </head>
+
+    <body>
+        <div style="height: 5px;"></div>
+
+        <div>
+            @Html.Partial("Header")
+        </div>
+        
+        <div style="height: 5px;"></div>
+    
+        <div style="clear: both; height: 20px"></div>
+    
+        @RenderBody()
+    </body>
+</html>

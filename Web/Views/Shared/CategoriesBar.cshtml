@@ -1,0 +1,78 @@
+﻿@using LightStore.DataAccess
+@using LightStore.Models
+@using LightStore.Web
+
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <div class="navbar-header" style="margin-left: 5px">
+            <span style="font-size: xx-large; color: white;">
+                Light Store
+            </span>
+        </div>
+        <div>
+            <ul class="nav navbar-nav">
+                <li>
+                    <span class="input-group" style="max-width: 400px; margin-top: 5px; margin-left: 5px">
+                        <input id="address" type="text" placeholder="Product Title" class="form-control">
+                        <span class="input-group-btn">
+                            <button class="btn btn-default" type="button" id="addressSearch">
+                                <i class="glyphicon glyphicon-search"></i>
+                            </button>
+                        </span>
+                    </span> 
+                </li>
+
+                @{
+                    List<Category> categories = CategoryDAO.GetAll();
+                    foreach (Category category in categories)
+                    {
+                        <li class="dropdown">
+                            <a style="margin-left: 5px" class="dropdown-toggle" data-toggle="dropdown">
+                                @category.Name
+                                <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                @foreach (Category subCategory in category.SubCategories)
+                                {
+                                    <li>
+                                        <a href="/Product/ListProducts?CategoryCode=@subCategory.Code">@subCategory.Name</a>
+                                    </li>
+                                }
+                            </ul>
+                        </li>
+                    }
+                }
+            </ul>
+            
+            <ul class="nav navbar-nav navbar-right">
+                @if (Session[DataKeys.User] != null)
+                {
+                    Customer customer = (Customer)Session[DataKeys.User];
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown">
+                            @customer.Email
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="/Customer/Logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a>
+                            </li>
+                        </ul>
+                    </li>
+                }
+                else
+                {
+                    <li><a href="/Customer/Register"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+                    <li><a href="/Customer/Login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                }
+               
+                <li class="dropdown">
+                    <a>
+                        <span class="glyphicon glyphicon-shopping-cart"></span> 
+                        Buy
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>

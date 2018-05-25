@@ -1,0 +1,16 @@
+.blueRow
+{
+    background-color: azure;
+    margin-bottom: 2px;
+    margin-left: 2px;
+}
+
+.headerRow
+{
+    background-color: lightgray;
+}
+
+.alternativeRow
+{
+    background-color: whitesmoke;
+}
