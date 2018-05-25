@@ -45,15 +45,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Account.cs" />
-    <Compile Include="Category.cs" />
     <Compile Include="Customer.cs" />
-    <Compile Include="Product.cs" />
-    <Compile Include="ProductSearch.cs" />
+    <Compile Include="Book.cs" />
+    <Compile Include="BookSearch.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Receipt.cs" />
-    <Compile Include="SelectedProductStatus.cs" />
-    <Compile Include="ViewModel\EditCategoryViewModel.cs" />
-    <Compile Include="ViewModel\EditProductViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram1.cd" />

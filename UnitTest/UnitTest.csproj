@@ -83,11 +83,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DataAccess\CategoryDAOTest.cs" />
-    <Compile Include="DataAccess\ProductDAOTest.cs" />
+    <Compile Include="DataAccess\BookDAOTest.cs" />
     <Compile Include="DataAccess\UnitTestUtil.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Web\ProductControllerTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App.config" />

@@ -10,11 +10,10 @@ using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Web;
 using LightStore.Models;
-using Color = LightStore.Models.Color;
 
 namespace LightStore.DataAccess
 {
-    public static class ProductDAO
+    public static class BookDAO
     {
         private static string tableName = "Products";
         private static string keyName = "Code";
@@ -38,23 +37,21 @@ namespace LightStore.DataAccess
             }
         }
 
-        public static void Save(Product product)
+        public static void Save(Book product)
         {
             string sql = "";
             if (IsExist(product.Code))
             {
                 sql = string.Format("Update Products set CategoryCode='{0}', Title='{1}', Description='{2}', Colors={3}, " +
                                     "Length={4}, Width={5}, Height={6}, Price={7}, Discount={8}, IsRecommended={9}, Pic=@Pic Where Code='{10}'",
-                                     product.Category.Code, product.Title, product.Description, GetColorsValue(product.Colors),
-                                     BaseDAO.GetDBValue(product.Length), BaseDAO.GetDBValue(product.Width), BaseDAO.GetDBValue(product.Height), 
+                                     product.Title, product.Description,  
                                      product.Price, BaseDAO.GetDBValue(product.Discount), BaseDAO.GetDBValue(product.IsRecommended), product.Code);
             }
             else
             {
                 sql = string.Format("Insert into Products (Code, CategoryCode, Title, Description, Colors, Length, Width, Height, Price, Discount, IsRecommended, Pic) " +
                                     "Values ('{0}','{1}', '{2}', '{3}',{4}, {5}, {6}, {7}, {8}, {9}, {10}, @Pic)",
-                                    product.Code, product.Category.Code, product.Title, product.Description, GetColorsValue(product.Colors),
-                                    BaseDAO.GetDBValue(product.Length), BaseDAO.GetDBValue(product.Width), BaseDAO.GetDBValue(product.Height), 
+                                    product.Code, product.Title, product.Description, 
                                     product.Price, BaseDAO.GetDBValue(product.Discount), BaseDAO.GetDBValue(product.IsRecommended));
             }
 
@@ -74,13 +71,13 @@ namespace LightStore.DataAccess
             conn.Close();
         }
 
-        public static List<Product> GetByCategoryCode(int categoryCode)
+        public static List<Book> GetByCategoryCode(int categoryCode)
         {
             string sql = selectQuery + string.Format(" Where prd.CategoryCode='{0}'", categoryCode);
             return LoadProducts(sql);
         }
 
-        public static Product Get(int code)
+        public static Book Get(int code)
         {
             string sql = selectQuery + string.Format(" Where prd.Code='{0}'", code);
             return LoadProducts(sql).FirstOrDefault();
@@ -103,7 +100,7 @@ namespace LightStore.DataAccess
 
         public static byte[] GetPic(int productCode)
         {
-            Product product = Get(productCode);
+            Book product = Get(productCode);
             if (product != null)
                 return product.Pic;
             else
@@ -115,58 +112,21 @@ namespace LightStore.DataAccess
             return BaseDAO.IsExist(tableName, keyName, code.ToString());
         }
 
-        private static List<Color> GetColors(string colorCodes)
-        {
-            List<Color> colors = new List<Color>();
-            if (!string.IsNullOrEmpty(colorCodes))
-            {
-                foreach (string colorCode in colorCodes.Split(','))
-                {
-                    Color color = (Color)Enum.Parse(typeof(Color), colorCode.Trim());
-                    colors.Add(color);
-                }
-            }
 
-            return colors;
-        }
-
-        private static string GetColorsValue(List<Color> colors)
-        {
-            string val = "";
-            if (colors != null && colors.Count > 0)
-            {
-                foreach (Color color in colors)
-                {
-                    val += (int) color + ",";
-                }
-
-                val = string.Format("'{0}'", val.Trim(','));
-            }
-            else
-                val = "NULL";
-
-            return val;
-        }
-
-        private static List<Product> LoadProducts(string sql)
+        private static List<Book> LoadProducts(string sql)
         {
             SqlConnection conn = BaseDAO.GetSqlConnection();
             SqlCommand cm = new SqlCommand(sql, conn);
             conn.Open();
             SqlDataReader dr = cm.ExecuteReader();
 
-            List<Product> products = new List<Product>();
+            List<Book> products = new List<Book>();
             while (dr.Read())
             {
-                Product product = new Product();
+                Book product = new Book();
                 product.Code = (int)dr["Code"];
                 product.Title = dr["Title"].ToString();
                 product.Description = dr["Description"].ToString();
-                product.Category = CategoryDAO.Get((int)dr["CategoryCode"]);
-                product.Colors = GetColors(BaseDAO.GetValue<string>(dr["Colors"]));
-                product.Length = BaseDAO.GetValue<int>(dr["Length"]);
-                product.Width = BaseDAO.GetValue<int>(dr["Width"]);
-                product.Height = BaseDAO.GetValue<int>(dr["Height"]);
                 product.Pic = BaseDAO.GetValue<byte[]>(dr["Pic"]);
                 product.Price = BaseDAO.GetValue<decimal>(dr["Price"]);
                 product.Discount = BaseDAO.GetValue<int?>(dr["Discount"], dr["CategoryDiscount"], dr["ParentCategoryDiscount"]);
@@ -179,18 +139,14 @@ namespace LightStore.DataAccess
             return products;
         }
 
-        public static List<Product> Search(ProductSearch productSearch)
+        public static List<Book> Search(BookSearch productSearch)
         {
             string sql = selectQuery;
             string condition = "";
-            if (productSearch.CategoryCode != null)
-                condition += string.Format("prd.CategoryCode = {0} And ", productSearch.CategoryCode);
             if (!string.IsNullOrEmpty(productSearch.Title))
                 condition += string.Format("prd.Title Like '%{0}%' And ", productSearch.Title);
-            if (productSearch.MinPrice != null)
-                condition += string.Format("prd.SalePrice >= {0} And ", productSearch.MinPrice);
-            if (productSearch.MaxPrice != null)
-                condition += string.Format("prd.SalePrice <= {0} And ", productSearch.MaxPrice);
+            if (productSearch.Author != null)
+                condition += string.Format("prd.Author Like '%{0}%' And ", productSearch.Author);
             if (productSearch.OnlyDiscounted)
                 condition += "HasDiscount = 1 And ";
             if (productSearch.OnlyRecommended)

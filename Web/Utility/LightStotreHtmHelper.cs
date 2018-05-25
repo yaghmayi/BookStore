@@ -18,42 +18,6 @@ namespace LightStore.Web
 {
     public static class  LightStotreHtmHelper
     {
-        public static HtmlString DisplayColors(List<Color> colors)
-        {
-            string html = "";
-
-            if (colors != null)
-            {
-                foreach (var color in colors)
-                {
-                    html += string.Format(@"<div style=""float: left; background-color: {0}; border: solid 1px; height: 10px; width: 10px""></div>", color) +
-                                          @"<div style=""float:left; height:10px; width:5px""></div>";
-                }
-            }
-
-            return new HtmlString(html);
-        }
-
-        public static HtmlString EditColors(List<Color> currentColors)
-        {
-            Array allColorCodes = Enum.GetValues(typeof(Color));
-            List<int> selectedColorCodes = currentColors.ConvertAll(en => (int)en);
-
-            string html = "";
-            foreach (int colorCode in allColorCodes)
-            {
-                html += string.Format(@"<div style=""background-color: {0}; border: solid 1px; width: 20px; float:left"" align=""center"">", Enum.GetName(typeof(Color), colorCode));
-                if (selectedColorCodes.Contains(colorCode))
-                    html += String.Format(@"<input type=""checkbox"" name=""Colors"" value=""{0}"" checked=""checked"" />", colorCode);
-                else
-                    html += string.Format(@"<input type=""checkbox"" name=""Colors"" value=""{0}"" />", colorCode);
-
-                html += "</div>";
-            }
-
-            return new HtmlString(html);
-        }
-
         public static HtmlString DisplayLabel(object fieldValue)
         {
 //            string html = string.Format(@"<input value=""{0}"" type=""text"" disabled=""disabled"" style=""margin-bottom: 2px"" />", fieldValue);
@@ -127,7 +91,7 @@ namespace LightStore.Web
             bool hasDiscount = false;
             foreach (int productCode in productCodes)
             {
-                Product product = ProductDAO.Get(productCode);
+                Book product = BookDAO.Get(productCode);
                 totalPrice += product.Price;
                 totalSalePrice += product.SalePrice;
 
@@ -155,59 +119,6 @@ namespace LightStore.Web
         public static HtmlString DisplayMessage(string message)
         {
             return new HtmlString(message);
-        }
-
-        public static HtmlString DisplayTitleForCategory(Action action, Category category)
-        {
-            string html = "";
-            string categoryPart = category.Name;
-            if (action == Action.Edit)
-                categoryPart = string.Format(@"<input id=""Name"" name=""Name"" value=""{0}"" type=""text"" style=""margin-bottom: 2px"" />", category.Name);
-            else if (action == Action.Create)
-            {
-                string newStr = null;
-                if (category.ParentCode != null)
-                    newStr = "New SubCategory";
-                else
-                    newStr = "New Category";
-
-                categoryPart = string.Format(@"<input id=""Name"" name=""Name"" value=""{0}"" type=""text"" style=""margin-bottom: 2px"" />", newStr);
-            }
-
-            if (category.ParentCode != null)
-            {
-                Category parentCategory = CategoryDAO.Get(category.ParentCode.Value);
-                html = "<h2>" +
-                            categoryPart +
-                            @" <label style=""font-size: small"">" +
-                            string.Format(@"(Of <a href=""/Product/ShowCategory/{0}"">{1}</a>)", parentCategory.Code, parentCategory.Name) +
-                            @"</label>" +
-                       "</h2>";
-            }
-            else
-            {
-                html = "<h2>" +
-                        categoryPart +
-                       "</h2> ";
-            }
-
-            return new HtmlString(html);
-        }
-
-        public static HtmlString DisplayDropDownListForCategories(string name, List<Category> categories, int selectedCode)
-        {
-            string html = string.Format(@"<select name=""{0}"" id=""{0}"" class=""form-control"">", name) + Environment.NewLine;
-
-            foreach (Category category in categories)
-            {
-                if (category.Code == selectedCode)
-                    html += string.Format(@"<option value=""{0}"" selected=""selected"">{1}</option>", category.Code, category.Name) + Environment.NewLine;
-                else
-                    html += string.Format(@"<option value=""{0}"">{1}</option>", category.Code, category.Name) + Environment.NewLine;
-            }
-            html += "</select>";
-
-            return new HtmlString(html);
         }
 
         public static string Contact(string str1, string str2)

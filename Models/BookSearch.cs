@@ -5,13 +5,10 @@ using System.Text;
 
 namespace LightStore.Models
 {
-    public class ProductSearch
+    public class BookSearch
     {
-        public int? CategoryCode { get; set; }
-        public int? ParentCategoryCode { get; set; }
         public string Title { get; set; }
-        public decimal? MinPrice { get; set; }
-        public decimal? MaxPrice { get; set; }
+        public string Author { get; set; }
         public bool OnlyDiscounted { get; set; }
         public bool OnlyRecommended { get; set; }
     }

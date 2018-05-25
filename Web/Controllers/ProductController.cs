@@ -31,25 +31,17 @@ namespace LightStore.Web.Controllers
         }
 
         [HttpGet]
-        public ActionResult ListProducts(int? categoryCode)
+        public ActionResult ListProducts()
         {
-            ProductSearch productSearch = new ProductSearch() { CategoryCode = categoryCode };
-            productSearch.ParentCategoryCode = CategoryDAO.Get(productSearch.CategoryCode.Value).ParentCode;
+            BookSearch productSearch = new BookSearch() { };
             return ListProducts(productSearch);
         }
 
 
         [HttpPost]
-        public ActionResult ListProducts(ProductSearch productSearch)
+        public ActionResult ListProducts(BookSearch productSearch)
         {
-            SetSession(DataKeys.MaxPrice, productSearch.MaxPrice.ToString());
-            List<Product> products = ProductDAO.Search(productSearch);
-//            List<Product> products = new List<Product>();
-            if (productSearch.CategoryCode != null)
-            {
-                Category category = CategoryDAO.Get(productSearch.CategoryCode.Value);
-                ViewData[DataKeys.Category] = category;
-            }
+            List<Book> products = BookDAO.Search(productSearch);
             ViewData[DataKeys.Products] = products;
 
             return View(productSearch);
@@ -64,7 +56,7 @@ namespace LightStore.Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult Foo(ProductSearch productSearch)
+        public ActionResult Foo(BookSearch productSearch)
         {
 //            productSearch.Title = "Foo";
 //            SetSession("MaxPrice", productSearch.MaxPrice.ToString());
@@ -72,81 +64,18 @@ namespace LightStore.Web.Controllers
             return View(productSearch);
         }
 
-        [HttpGet]
-        [MyAthorize("Admin")]
-        public ActionResult CreateProduct(int categoryCode)
-        {
-            EditProductViewModel editProductViewModel = new EditProductViewModel();
-            Category category = CategoryDAO.Get(categoryCode);
-            editProductViewModel.CategoryCode = categoryCode;
-            editProductViewModel.CategoryName = category.Name;
-            editProductViewModel.Code = ProductDAO.GetNextCode();
-            editProductViewModel.Title = "New Product";
-
-            return View(editProductViewModel);
-        }
-
-        [HttpPost]
-        public ActionResult CreateProduct(EditProductViewModel editProductViewModel)
-        {
-            Product product = MakeProduct(editProductViewModel);
-            product.Pic = MakePicFromRequestFile("Pic");
-
-            ProductDAO.Save(product);
-
-            return RedirectToAction("ListProducts", "Product", new { categoryCode = product.Category.Code });
-        }
-
-        [HttpGet]
-        [MyAthorize("Admin")]
-        public ActionResult EditProduct(int id)
-        {
-            Product product = ProductDAO.Get(id);
-            EditProductViewModel editProductViewModel = MakeEditProductViewModel(product);
-
-            return View(editProductViewModel);
-        }
-
-        [HttpPost]
-        public ActionResult EditProduct(EditProductViewModel editProductViewModel)
-        {
-            Product product = MakeProduct(editProductViewModel);
-            byte[] pic = MakePicFromRequestFile("Pic");
-            if (pic != null)
-                product.Pic = pic;
-            else
-                product.Pic = ProductDAO.GetPic(product.Code);
-            ProductDAO.Save(product);
-
-            return RedirectToAction("ListProducts", "Product", new { categoryCode = product.Category.Code });
-        }
 
         public ActionResult ShowProduct(int id)
         {
-            Product product = ProductDAO.Get(id);
+            Book product = BookDAO.Get(id);
             return View(product);
         }
 
-        [HttpGet]
-        [MyAthorize("Admin")]
-        public ActionResult DeleteProduct(int id)
-        {
-            Product product = ProductDAO.Get(id);
-            EditProductViewModel editProductViewModel = MakeEditProductViewModel(product);
-            return View(editProductViewModel);
-        }
-
-        [HttpPost]
-        public ActionResult DeleteProduct(EditProductViewModel editProductViewModel)
-        {
-            ProductDAO.Delete(editProductViewModel.Code);
-            return RedirectToAction("ListProducts", "Product", new { categoryCode = editProductViewModel.CategoryCode });
-        }
 
         [AcceptVerbs(HttpVerbs.Get)]
         public ActionResult ShowPhoto(int id)
         {
-            Product product = ProductDAO.Get(id);
+            Book product = BookDAO.Get(id);
             return new ImageResult(product.Pic);
         }
 

@@ -16,7 +16,7 @@ namespace LightStore.Web
             decimal saleAmount = 0;
             foreach (int productCode in productCodes)
             {
-                Product product = ProductDAO.Get(productCode);
+                Book product = BookDAO.Get(productCode);
                 totalAmount += product.Price;
                 saleAmount += product.SalePrice;
             }

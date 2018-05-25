@@ -70,23 +70,10 @@ namespace LightStore.Web.Controllers
                 return Session[DataKeys.RefererPage].ToString();
             else if (ConfigurationManager.AppSettings[DataKeys.RefererPage] != null)
                 return ConfigurationManager.AppSettings[DataKeys.RefererPage];
-            else if (IsExistSubCategory())
-                return "/Product/ListProducts/?categoryCode=" + CategoryDAO.GetAll().First().SubCategories.First().Code;
             else
-                return "/Product/ListCategories";
+                return "/Product/ListProducts";
         }
 
-        private bool IsExistSubCategory()
-        {
-            List<Category> categories = CategoryDAO.GetAll();
-            return categories.Count > 0 && categories.Exists(c => c.SubCategories.Count > 0);
-        }
-
-//        [HttpGet]
-//        public ActionResult Payment()
-//        {
-//            return View();
-//        }
 
         [HttpGet]
         public ActionResult ShowReceipt()
