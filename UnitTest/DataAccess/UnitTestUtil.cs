@@ -10,15 +10,6 @@ namespace LightStore.UnitTest.DataAccess
 {
     public static class TestUtil
     {
-        public static void ClearTable(string tableName)
-        {
-            SqlConnection conn = BaseDAO.GetSqlConnection();
-            SqlCommand cm = new SqlCommand(string.Format("Delete from {0}", tableName), conn);
-            conn.Open();
-            cm.ExecuteNonQuery();
-            conn.Close();
-        }
-
         public static int GetRecordsCount(string tableName)
         {
             SqlConnection conn = BaseDAO.GetSqlConnection();

@@ -89,6 +89,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="App.config" />
+    <Content Include="Data\Books.xml" />
     <Content Include="Watch.jpg" />
   </ItemGroup>
   <ItemGroup>
