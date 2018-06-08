@@ -83,7 +83,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DataAccess\BookDAOTest.cs" />
+    <Compile Include="BookDAOTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -103,7 +103,6 @@
     <Content Include="Data\Images\DefaultImage.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Watch.jpg" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
