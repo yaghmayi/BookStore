@@ -1,0 +1,62 @@
+﻿@using BookStore.Web
+@model BookStore.Models.Book
+
+<head>
+    <script src="~/Content/Scripts/GetSetSession.js"></script>
+    <script src="~/Content/Scripts/AddShopItem.js"></script>
+</head>
+
+<div class="col-md-4 col-sm-6 col-xs-12 well">
+    <div style="float: left; width: 50%">
+        <img src="/Book/ShowPhoto/@Model.Code" style="height: 100px;" />
+    </div>
+
+    <div style="height: 2px"></div>
+
+
+    <div style="padding-top: 5px">
+        <h5>
+            @Html.ActionLink(Model.Title, "ShowBook", new { id = @Model.Code })
+        </h5>
+        by <I>@Model.Author</I>
+    </div>
+
+    <div>
+        @LightStotreHtmHelper.DisplayPrice(@Model.Price, @Model.Discount)
+    </div>
+
+    <div style="padding-top: 5px">
+        @if (Model.InStock > 0)
+        {
+            <h5>
+                <b>@Model.InStock</b>  Items are available.
+            </h5>
+        }
+        else
+        {
+            <h5>
+                <b>No</b> Item is available.
+            </h5>
+        }
+    </div>
+
+    <div style="padding-top: 2px">
+        @if (Model.InStock > 0)
+        {
+            <button type="button" class="btn btn-default" data-toggle="modal" data-target=".bs-example-modal-sm" onclick="AddShopItem(@Model.Code)">
+                Add
+            </button>
+
+            <span id="@LightStotreHtmHelper.Contact("prg", @Model.Code.ToString())" style="display: none">
+                <b>Added</b>
+            </span>
+        }
+        else
+        {
+            <button type="button" disabled="disabled" class="btn btn-default">
+                Add
+            </button>
+        }
+    </div>
+</div>
+

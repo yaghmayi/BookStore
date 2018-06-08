@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Books>
+  <Book Code="101">
+    <Title>How To Be A Man</Title>
+    <Author>Jim Nilson</Author>
+    <Description>It is a physological book.</Description>
+    <Price>350</Price>
+    <Discount>15</Discount>
+    <InStock>0</InStock>
+  </Book>
+  <Book Code="102">
+    <Title>Tarzan</Title>
+    <Author>Michael Sanford</Author>
+    <Description>It is an interesting legend.</Description>
+    <Price>200</Price>
+    <InStock>7</InStock>
+  </Book>
+  <Book Code="103">
+    <Title>The Migrant</Title>
+    <Author>Richard Bridges</Author>
+    <Description>It is a book about the problems of migrants.</Description>
+    <Price>400</Price>
+    <InStock>3</InStock>
+  </Book>
+  <Book Code="104">
+    <Title>Cast Away</Title>
+    <Author>Michael Sanford</Author>
+    <Description>It is a novel based on true story.</Description>
+    <Price>250</Price>
+    <InStock>12</InStock>
+  </Book>
+</Books>

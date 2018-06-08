@@ -1,16 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
-using System.Linq;
 using System.Net.Mail;
-using System.Web;
 using System.Web.Mvc;
-using System.Web.Security;
-using LightStore.DataAccess;
-using LightStore.Models;
-using LightStore.Web.Security;
+using BookStore.DataAccess;
+using BookStore.Models;
+using BookStore.Web.Security;
 
-namespace LightStore.Web.Controllers
+namespace BookStore.Web.Controllers
 {
     public class CustomerController : Controller
     {
@@ -71,7 +68,7 @@ namespace LightStore.Web.Controllers
             else if (ConfigurationManager.AppSettings[DataKeys.RefererPage] != null)
                 return ConfigurationManager.AppSettings[DataKeys.RefererPage];
             else
-                return "/Product/ListProducts";
+                return "/Product/ListBooks";
         }
 
 
@@ -89,8 +86,8 @@ namespace LightStore.Web.Controllers
                 mail.To.Add(currentUser.Email);
 
 
-                mail.Subject = "Light Store Receipt Number";
-                mail.Body = string.Format("Light Store Receipt.{0}Receipt Number: {1}{0}Amount:{2}{0}Date: {3}-{4}{0}Time: {5}",
+                mail.Subject = "Book Store Receipt Number";
+                mail.Body = string.Format("Book Store Receipt.{0}Receipt Number: {1}{0}Amount:{2}{0}Date: {3}-{4}{0}Time: {5}",
                                           Environment.NewLine, receipt.Number, receipt.SaleAmount, receipt.Date.ToShortDateString(), receipt.Date.DayOfWeek, receipt.Time);
 
                 SmtpServer.Port = 587;

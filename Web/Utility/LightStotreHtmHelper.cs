@@ -7,14 +7,14 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.UI.WebControls;
 using System.Web.WebPages.Html;
-using LightStore.DataAccess;
-using LightStore.Models;
-using LightStore.Web.Controllers;
+using BookStore.Web.Controllers;
 using HtmlHelper = System.Web.WebPages.Html.HtmlHelper;
 using System.Web.Mvc.Html;
+using BookStore.DataAccess;
+using BookStore.Models;
 using SelectListItem = System.Web.WebPages.Html.SelectListItem;
 
-namespace LightStore.Web
+namespace BookStore.Web
 {
     public static class  LightStotreHtmHelper
     {
@@ -26,25 +26,6 @@ namespace LightStore.Web
             return new HtmlString(html);
         }
 
-        public static HtmlString DisplaySize(int? length, int? width, int? height)
-        {
-            string sizeStr = "";
-            if (HasSizeValue(length))
-                sizeStr += length + " * ";
-            if (HasSizeValue(width))
-                sizeStr += width + " * ";
-            if (HasSizeValue(height))
-                sizeStr += height + " * ";
-            if (sizeStr != "")
-                sizeStr = sizeStr.Substring(0, sizeStr.Length - " * ".Length);
-            else
-                sizeStr = "-";
-
-
-            string html = string.Format(@"<label style=""margin-bottom: 2px"">{0} (Size)<label>", sizeStr);
-
-            return new HtmlString(html);
-        }
 
         public static string NumberToMoneyFormat(decimal? number)
         {
@@ -125,12 +106,5 @@ namespace LightStore.Web
         {
             return str1 + str2;
         }
-
-        private static bool HasSizeValue(int? val)
-        {
-            return val != null && val > 0;
-        }
-
-
     }
 }

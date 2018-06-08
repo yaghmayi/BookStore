@@ -1,62 +1,121 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
-using System.Data;
-using System.Data.SqlClient;
-using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Reflection;
-using System.Runtime.InteropServices;
-using System.Web;
-using LightStore.Models;
+using System.Xml;
+using System.Xml.Serialization;
+using BookStore.Models;
 
-namespace LightStore.DataAccess
+namespace BookStore.DataAccess
 {
     public static class BookDAO
     {
-        public static Book Get(int code)
+        private static String dataFolder
         {
-            return null;
-            //string sql = selectQuery + string.Format(" Where prd.Code='{0}'", code);
-            //return LoadProducts(sql).FirstOrDefault();
+            get
+            {
+                String dataSourceFolder = ConfigurationManager.AppSettings.Get("DataSourceFolder");
+
+                return AppDomain.CurrentDomain.BaseDirectory + "//" + dataSourceFolder;
+            }
         }
 
-        public static byte[] GetPic(int productCode)
+        private static String imageFolder
         {
-            Book product = Get(productCode);
-            if (product != null)
-                return product.Pic;
-            else
-                return null;
+            get
+            {
+                return dataFolder + "//Images";
+            }
         }
+        private static String dataFilePath
+        {
+            get
+            {
+                return dataFolder + "//Books.xml";
+            }
+        }
+
+        public static List<Book> GetAll()
+        {
+            XmlSerializer desSerializer = new XmlSerializer(typeof(List<Book>), new XmlRootAttribute("Books"));
+            StreamReader xmlReader = new StreamReader(dataFilePath);
+            List<Book> books = (List<Book>) desSerializer.Deserialize(xmlReader);
+
+            foreach  (Book book in books)
+            {
+                String imageFilePath = imageFolder + "//" + book.Code + ".jpg";
+                if (File.Exists(imageFilePath))
+                    book.Pic = File.ReadAllBytes(imageFilePath);
+                else
+                    book.Pic = File.ReadAllBytes(imageFolder + "//defaultImage.jpg");
+            }
+
+            xmlReader.Close();
+
+            return books;
+        }
+
+        public static Book Get(int code)
+        {
+            List<Book> books = GetAll();
+            Book book = books.Find(bk => bk.Code == code);
+
+            return book;
+        }
+
+        public static void CheckOut(int code)
+        {
+            if (IsExist(code))
+            {
+                Book book = Get(code);
+                if (book.InStock > 0)
+                {
+                    XmlDocument xmlDoc = new XmlDocument();
+                    xmlDoc.Load(dataFilePath);
+                    XmlNode inStockNode = xmlDoc.SelectSingleNode("Books/Book[@Code=" + code + "]/InStock"); 
+                    int inStock = int.Parse(inStockNode.InnerText);
+                    inStockNode.InnerText = (inStock - 1).ToString();
+
+                    xmlDoc.Save(dataFilePath);
+                }
+            }
+        }
+
+        public static void CheckIn(int code, int boughtItems)
+        {
+            if (IsExist(code))
+            {
+                XmlDocument xmlDoc = new XmlDocument();
+                xmlDoc.Load(dataFilePath);
+                XmlNode inStockNode = xmlDoc.SelectSingleNode("Books/Book[@Code=" + code + "]/InStock");
+                int inStock = int.Parse(inStockNode.InnerText);
+                inStockNode.InnerText = (inStock + boughtItems).ToString();
+
+                xmlDoc.Save(dataFilePath);
+            }
+        }
+
 
         private static bool IsExist(int code)
         {
-            return false;
-            //return BaseDAO.IsExist(tableName, keyName, code.ToString());
+            Book book = Get(code);
+
+            return book != null;
         }
 
-        public static List<Book> Search(BookSearch bookSearch)
+        public static List<Book> Search(String searchTrem)
         {
-            return null;
-            //string condition = "";
-            //if (!string.IsNullOrEmpty(bookSearch.Title))
-            //    condition += string.Format("prd.Title Like '%{0}%' And ", bookSearch.Title);
-            //if (bookSearch.Author != null)
-            //    condition += string.Format("prd.Author Like '%{0}%' And ", bookSearch.Author);
-            //if (bookSearch.OnlyDiscounted)
-            //    condition += "HasDiscount = 1 And ";
-            //if (bookSearch.OnlyRecommended)
-            //    condition += "IsRecommended = 1 And ";
+            List<Book> books = GetAll();
 
-            //if (condition != "")
-            //{
-            //    condition = condition.Substring(0, condition.Length - "And ".Length);
-            //    sql += " Where " + condition;
-            //}
+            if (!string.IsNullOrEmpty(searchTrem))
+            {
+                String txt = searchTrem.ToLower().Trim();
 
-            //return LoadProducts(sql);
+                books = books.FindAll(bk => !string.IsNullOrEmpty(bk.Title) &&
+                                            (bk.Title.ToLower().Contains(txt) || bk.Author.ToLower().Contains(txt)));
+            }
+
+            return books;
         }
     }
 }

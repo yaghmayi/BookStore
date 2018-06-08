@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace LightStore.Models
+namespace BookStore.Models
 {
     public class Receipt
     {

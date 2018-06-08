@@ -1,6 +1,6 @@
-﻿@using LightStore.DataAccess
-@using LightStore.Models
-@using LightStore.Web
+﻿@using BookStore.DataAccess
+@using BookStore.Models
+@using BookStore.Web
 
 @{
     ViewBag.Title = "ShopList";
@@ -9,12 +9,11 @@
 <html>
     <head>
         <link href="~/Content/Site.css" rel="stylesheet" />
-        <script src="~/Content/Scripts/FinishShop.js"></script>
         <link href="~/Content/Bootstrap/css/bootstrap.min.css" rel="stylesheet" />
         <script src="~/Content/Bootstrap/js/bootstrap.min.js"></script>
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-        <script src="~/Content/Scripts/ClosePayment.js"></script>
-@*        <script src="~/Content/Scripts/ShowPaymentDialog.js"></script>*@
+        <script src="~/Content/Scripts/GetSetSession.js"></script>
+        <script src="~/Content/Scripts/DeleteShopItem.js"></script>
     </head>
 
 
@@ -28,6 +27,7 @@
                         <td><b>Price</b></td>
                         <td><b>Count</b></td>
                         <td><b>Total</b></td>
+                        <td></td>
                     </tr>
                     @{
                         decimal totalPrice = 0;
@@ -38,20 +38,25 @@
                         string rowClass = null;
                         foreach (IGrouping<int, int> item in @shopList.GroupBy(x => x).ToList())
                         {
-                            Product product = ProductDAO.Get(item.Key);
-                            totalPrice += product.Price;
-                            totalSalePrice += product.SalePrice;
+                            Book book = BookDAO.Get(item.Key);
+                            totalPrice += book.Price;
+                            totalSalePrice += book.SalePrice;
                             rowClass = (rowIndex % 2 == 0) ? "alternativeRow" : null;
                             <tr class="@rowClass">
                                 <td>
-                                    <img src="/Product/ShowPhoto/@product.Code" style="height: 100px;" />
+                                    <img src="/Book/ShowPhoto/@book.Code" style="height: 100px;" />
                                 </td>
                                 <td>
-                                    @Html.ActionLink(product.Title, "ShowProduct", "Product", new { id = @product.Code }, null)
+                                    @Html.ActionLink(book.Title, "ShowBook", "Book", new { id = book.Code }, null)
                                 </td>
-                                <td>@LightStotreHtmHelper.DisplayPrice(product.Price, product.Discount)</td>
+                                <td>@LightStotreHtmHelper.DisplayPrice(book.Price, book.Discount)</td>
                                 <td>@item.Count()</td>
-                                <td>@LightStotreHtmHelper.DisplayPrice(item.Count() * product.Price, product.Discount)</td>
+                                <td>@LightStotreHtmHelper.DisplayPrice(item.Count() * book.Price, book.Discount)</td>
+                                <td>
+                                    <button type="button" class="btn btn-default" data-toggle="modal" data-target=".bs-example-modal-sm" onclick="DeleteShopItem(@book.Code)">
+                                        Delete
+                                    </button>
+                                </td>
                             </tr>
 
                             rowIndex = rowIndex + 1;
@@ -75,9 +80,14 @@
 
                             </button>
                         </td>
+                        <td></td>
                     </tr>
                     
                 </table>
+            </div>
+            
+            <div class="col-sm-12">
+                @Html.ActionLink("Back to List", "ListBooks", "Book")
             </div>
 
         </div>

@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
 using System.Web;
-using LightStore.Models;
+using BookStore.Models;
 
-namespace LightStore.Web.Security
+namespace BookStore.Web.Security
 {
     public static class AuthorizeHelper
     {

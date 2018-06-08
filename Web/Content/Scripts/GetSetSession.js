@@ -2,7 +2,7 @@
 
 function GetSession(id) {
     $.ajax({
-        url: '/Product/GetSession/',
+        url: '/Book/GetSession/',
         data: { id: id },
         async: false,
         success: function (data) {
@@ -15,7 +15,7 @@ function GetSession(id) {
 
 function SetSession(id, val) {
     $.ajax({
-        url: '/Product/SetSession/',
+        url: '/Book/SetSession/',
         data: { id: id, value: val },
         success: function (data) {
         }

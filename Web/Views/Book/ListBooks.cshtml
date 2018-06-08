@@ -1,0 +1,17 @@
+﻿@using BookStore.Models
+
+<html>
+
+    <form method="POST">
+        <div class="container ">
+            <div class="col-sm-12">
+                <div class="row clearfix">
+                    @foreach (Book book in ((List<Book>)ViewData["Books"]))
+                    {
+                        @Html.Partial("BookSummary", book)
+                    }
+                </div>
+            </div>
+        </div>
+    </form>
+</html>

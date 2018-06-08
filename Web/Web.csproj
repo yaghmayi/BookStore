@@ -82,6 +82,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\Books.xml" />
+    <Content Include="App_Data\Images\101.jpg" />
+    <Content Include="App_Data\Images\102.jpg" />
+    <Content Include="App_Data\Images\103.jpg" />
+    <Content Include="App_Data\Images\DefaultImage.jpg" />
     <Content Include="Content\Bootstrap\css\bootstrap-theme.css" />
     <Content Include="Content\Bootstrap\css\bootstrap-theme.min.css" />
     <Content Include="Content\Bootstrap\css\bootstrap.css" />
@@ -89,23 +94,17 @@
     <Content Include="Content\Bootstrap\css\bootstrap-slider.css" />
     <Content Include="Content\Bootstrap\css\CircleButtons.css" />
     <Content Include="Content\Bootstrap\js\bootstrap.min.js" />
-    <Content Include="Content\default.css" />
+    <Content Include="Content\Scripts\Search.js" />
+    <Content Include="Content\Scripts\DeleteShopItem.js" />
     <Content Include="Content\Scripts\modals.js" />
     <Content Include="Content\Scripts\ShowPaymentDialog.js" />
     <Content Include="Content\Scripts\LoadShopItemsCount.js" />
     <Content Include="Content\Scripts\SignUp.js" />
     <Content Include="Content\Scripts\Login.js" />
-    <Content Include="Content\Test.css" />
     <Content Include="Content\Bootstrap\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Content\Bootstrap\js\bootstrap-slider.js" />
-    <Content Include="Content\Images\AddShopItem.jpg" />
-    <Content Include="Content\Images\Light.png" />
-    <Content Include="Content\Images\ProgressBar.swf" />
-    <Content Include="Content\Images\Recommended.png" />
-    <Content Include="Content\Images\BuyNow.jpg" />
     <Content Include="Content\Scripts\AddShopItem.js" />
     <Content Include="Content\Scripts\GetSetSession.js" />
-    <Content Include="Content\Scripts\UnUsed.js" />
     <Content Include="Content\Site.css" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
@@ -143,7 +142,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\Base\ImageResult.cs" />
     <Compile Include="Controllers\CustomerController.cs" />
-    <Compile Include="Controllers\ProductController.cs" />
+    <Compile Include="Controllers\BookController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -162,25 +161,13 @@
     <Content Include="Content\Bootstrap\css\bootstrap.css.map" />
     <Content Include="Views\Shared\Login.cshtml" />
     <Content Include="Views\Shared\SignUp.cshtml" />
-    <Content Include="Views\Product\CreateCategory.cshtml" />
-    <Content Include="Views\Product\CreateProduct.cshtml" />
-    <Content Include="Views\Product\DeleteCategory.cshtml" />
-    <Content Include="Views\Product\DeleteProduct.cshtml" />
-    <Content Include="Views\Product\EditCategory.cshtml" />
-    <Content Include="Views\Product\EditProduct.cshtml" />
-    <Content Include="Views\Product\ListCategories.cshtml" />
-    <Content Include="Views\Product\ListProducts.cshtml" />
-    <Content Include="Views\Product\SaveImage.cshtml" />
-    <Content Include="Views\Product\ShowCategory.cshtml" />
-    <Content Include="Views\Product\ShowProduct.cshtml" />
+    <Content Include="Views\Book\ListBooks.cshtml" />
+    <None Include="Views\Book\ShowBook.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Customer\ShopList.cshtml" />
-    <Content Include="Views\Shared\ProductSearchPanel.cshtml" />
-    <Content Include="Views\Product\Foo.cshtml" />
-    <Content Include="Views\Shared\ProductSummary.cshtml" />
-    <Content Include="Views\Shared\CategoriesBar.cshtml" />
+    <Content Include="Views\Shared\BookSummary.cshtml" />
     <Content Include="Content\Bootstrap\fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Content\Bootstrap\fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="Content\Bootstrap\fonts\glyphicons-halflings-regular.woff" />
@@ -188,7 +175,6 @@
     <Content Include="Views\Shared\Header.cshtml" />
     <Content Include="Views\Shared\Payment.cshtml" />
     <Content Include="Views\Customer\ShowReceipt.cshtml" />
-    <Content Include="Views\Shared\ChangePic.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -196,10 +182,7 @@
       <DependentUpon>Web.config</DependentUpon>
     </None>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\DataAccess\DataAccess.csproj">
       <Project>{a09b4f48-fea7-4056-88c8-c9ad6e4bff71}</Project>
@@ -208,6 +191,10 @@
     <ProjectReference Include="..\Models\Models.csproj">
       <Project>{7a8463f0-7058-4eaa-b3e2-b678683013d1}</Project>
       <Name>Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Services1\Services.csproj">
+      <Project>{2cd4dddc-01dc-45a0-aee2-3c961d45bc68}</Project>
+      <Name>Services</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

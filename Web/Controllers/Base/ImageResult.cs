@@ -6,7 +6,7 @@ using System.Text;
 using System.Web;
 using System.Web.Mvc;
 
-namespace LightStore.Web.Controllers.Base
+namespace BookStore.Web.Controllers.Base
 {
     public class ImageResult : ActionResult
     {

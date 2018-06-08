@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using LightStore.DataAccess;
-using LightStore.Models;
+using BookStore.DataAccess;
+using BookStore.Models;
 
-namespace LightStore.Web
+namespace BookStore.Web
 {
     public class CommonUtils
     {

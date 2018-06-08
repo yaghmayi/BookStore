@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
 
-namespace LightStore.Web
+namespace BookStore.Web
 {
     public class MvcApplication : System.Web.HttpApplication
     {
@@ -19,7 +19,7 @@ namespace LightStore.Web
             routes.MapRoute(
                 "Default", // Route name
                 "{controller}/{action}/{id}", // URL with parameters
-                new { controller = "Product", action = "Test", id = UrlParameter.Optional } // Parameter defaults
+                new { controller = "Book", action = "ListBooks", id = UrlParameter.Optional } // Parameter defaults
             );
         }
         protected void Application_Start()

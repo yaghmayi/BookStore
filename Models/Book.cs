@@ -1,16 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Drawing;
-using System.Linq;
-using System.Web;
+﻿using System.Xml.Serialization;
 
-namespace LightStore.Models
+namespace BookStore.Models
 {
-    public class Book
+    public class Book : IBook
     {
         private byte[] pic = null;
 
+        [XmlAttribute]
         public int Code { get; set; }
         public string Title { get; set; }
         public string Author { get; set; }
@@ -25,7 +21,6 @@ namespace LightStore.Models
         public decimal Price { get; set; }
 
         public int? Discount { get; set; }
-        public bool IsRecommended { get; set; }
 
         public decimal SalePrice
         {

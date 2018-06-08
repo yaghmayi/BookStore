@@ -1,18 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Books>
   <Book Code="101">
-    <Title>Bookk1</Title>
+    <Title>Book1</Title>
     <Author>Author1</Author>
     <Price>350</Price>
-    <InStock>10</InStock>
-    <ImageFileName>Book1.jpg</ImageFileName>
+    <Discount>5</Discount>
+    <InStock>2</InStock>
   </Book>
 
   <Book Code="102">
-    <Title>Bookk2</Title>
+    <Title>Book2</Title>
     <Author>Author2</Author>
     <Price>200</Price>
     <InStock>17</InStock>
-    <ImageFileName>Book2.jpg</ImageFileName>
   </Book>
 </Books>
