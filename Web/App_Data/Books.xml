@@ -13,20 +13,20 @@
     <Author>Michael Sanford</Author>
     <Description>It is an interesting legend.</Description>
     <Price>200</Price>
-    <InStock>7</InStock>
+    <InStock>6</InStock>
   </Book>
   <Book Code="103">
     <Title>The Migrant</Title>
     <Author>Richard Bridges</Author>
     <Description>It is a book about the problems of migrants.</Description>
     <Price>400</Price>
-    <InStock>3</InStock>
+    <InStock>2</InStock>
   </Book>
   <Book Code="104">
     <Title>Cast Away</Title>
     <Author>Michael Sanford</Author>
     <Description>It is a novel based on true story.</Description>
     <Price>250</Price>
-    <InStock>12</InStock>
+    <InStock>10</InStock>
   </Book>
 </Books>

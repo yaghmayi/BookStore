@@ -49,9 +49,9 @@
                                 <td>
                                     @Html.ActionLink(book.Title, "ShowBook", "Book", new { id = book.Code }, null)
                                 </td>
-                                <td>@LightStotreHtmHelper.DisplayPrice(book.Price, book.Discount)</td>
+                                <td>@BookStotreHtmHelper.DisplayPrice(book.Price, book.Discount)</td>
                                 <td>@item.Count()</td>
-                                <td>@LightStotreHtmHelper.DisplayPrice(item.Count() * book.Price, book.Discount)</td>
+                                <td>@BookStotreHtmHelper.DisplayPrice(item.Count() * book.Price, book.Discount)</td>
                                 <td>
                                     <button type="button" class="btn btn-default" data-toggle="modal" data-target=".bs-example-modal-sm" onclick="DeleteShopItem(@book.Code)">
                                         Delete
@@ -67,7 +67,7 @@
                         <td colspan="3"></td>
                         <td><b>Total Price:</b></td>
                         <td>
-                            @LightStotreHtmHelper.DisplayPrice(totalPrice, totalSalePrice)
+                            @BookStotreHtmHelper.DisplayPrice(totalPrice, totalSalePrice)
 
                             <button type="button" class="dropdown btn btn-default" id="menuLogin" style="max-width: 100px">
                                 <a class="dropdown-toggle" href="#" data-toggle="dropdown" id="navLogin">

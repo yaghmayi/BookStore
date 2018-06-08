@@ -31,7 +31,7 @@
 
             <div class="row clearfix">
                 <div class="col-xs-12">
-                    @LightStotreHtmHelper.DisplayPrice(@Model.Price, @Model.Discount)
+                    @BookStotreHtmHelper.DisplayPrice(@Model.Price, @Model.Discount)
                 </div>
             </div>
             
@@ -71,7 +71,7 @@
                 Add
             </button>
 
-            <span id="@LightStotreHtmHelper.Contact("prg", @Model.Code.ToString())" style="display: none">
+            <span id="@BookStotreHtmHelper.Contact("prg", @Model.Code.ToString())" style="display: none">
                 <b>Added</b>
             </span>
         }

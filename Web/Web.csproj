@@ -151,7 +151,7 @@
     <Compile Include="Security\MyAuthorizeAttribute.cs" />
     <Compile Include="Utility\Action.cs" />
     <Compile Include="Utility\CommonUtils.cs" />
-    <Compile Include="Utility\LightStotreHtmHelper.cs" />
+    <Compile Include="Utility\BookStotreHtmHelper.cs" />
     <Compile Include="Utility\DataKeys.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -1,26 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Net;
+﻿using System.Collections.Generic;
 using System.Web;
-using System.Web.Mvc;
-using System.Web.UI.WebControls;
-using System.Web.WebPages.Html;
-using BookStore.Web.Controllers;
 using HtmlHelper = System.Web.WebPages.Html.HtmlHelper;
-using System.Web.Mvc.Html;
 using BookStore.DataAccess;
 using BookStore.Models;
 using SelectListItem = System.Web.WebPages.Html.SelectListItem;
 
 namespace BookStore.Web
 {
-    public static class  LightStotreHtmHelper
+    public static class  BookStotreHtmHelper
     {
         public static HtmlString DisplayLabel(object fieldValue)
         {
-//            string html = string.Format(@"<input value=""{0}"" type=""text"" disabled=""disabled"" style=""margin-bottom: 2px"" />", fieldValue);
             string html = string.Format(@"<label style=""margin-bottom: 2px"">{0}<label>", fieldValue);
 
             return new HtmlString(html);
@@ -41,7 +31,7 @@ namespace BookStore.Web
                 {
                     int realSideNo = splittedNumber[1].Length;
                     string realSide = "";
-                    string format = "{0:#,0."; //+realSide.PadLeft(realSideNo, '0') + "}";
+                    string format = "{0:#,0."; 
                     format += realSide.PadLeft(realSideNo, '0') + "}";
 
                     return string.Format(format, number);
@@ -60,30 +50,6 @@ namespace BookStore.Web
                 html = string.Format(@"<strike>{0}</strike> {1}", NumberToMoneyFormat(price), NumberToMoneyFormat(salePrice));
             }
 
-            html = string.Format(@"<span class=""label label-primary"">${0}</span>", html);
-
-            return new HtmlString(html);
-        }
-
-        public static HtmlString DisplayPrice(List<int> productCodes)
-        {
-            decimal totalPrice = 0;
-            decimal totalSalePrice = 0;
-            bool hasDiscount = false;
-            foreach (int productCode in productCodes)
-            {
-                Book product = BookDAO.Get(productCode);
-                totalPrice += product.Price;
-                totalSalePrice += product.SalePrice;
-
-                if (product.HasDiscount)
-                    hasDiscount = true;
-            }
-
-
-            string html = NumberToMoneyFormat(totalSalePrice);
-            if (hasDiscount)
-                html = string.Format(@"<strike>{0}</strike> {1}", NumberToMoneyFormat(totalSalePrice), NumberToMoneyFormat(totalSalePrice));
             html = string.Format(@"<span class=""label label-primary"">${0}</span>", html);
 
             return new HtmlString(html);

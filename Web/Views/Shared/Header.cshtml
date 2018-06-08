@@ -22,7 +22,7 @@
                 <ul class="nav navbar-nav">
                     <li>
                         <span class="input-group" style="max-width: 400px; margin-top: 5px; margin-left: 5px">
-                            <input id="searchTextBox" type="text" placeholder="" class="form-control">
+                            <input id="searchTextBox" type="text" placeholder="" class="form-control" onkeydown="if (event.keyCode == 13) { Search() }">
                             <span class="input-group-btn">
                                 <button class="btn btn-default" type="button" id="searchButton" onclick="Search()">
                                     <i class="glyphicon glyphicon-search"></i>
