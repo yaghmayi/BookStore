@@ -7,7 +7,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace BookStore.UnitTest
 {
     [TestClass]
-    class BookServiceTest
+    public class BookServiceTest
     {
         [TestMethod]
         public void GetBooksAsync()
