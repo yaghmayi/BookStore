@@ -206,7 +206,7 @@
       <Project>{7a8463f0-7058-4eaa-b3e2-b678683013d1}</Project>
       <Name>Models</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Services1\Services.csproj">
+    <ProjectReference Include="..\Services\Services.csproj">
       <Project>{2cd4dddc-01dc-45a0-aee2-3c961d45bc68}</Project>
       <Name>Services</Name>
     </ProjectReference>
