@@ -118,7 +118,7 @@
     <Author>Omar Epps</Author>
     <Description>Author and world renowned actor Omar Epps chronicles his journey from humble beginnings in Brooklyn, New York, to the bright lights of Hollywood. </Description>
     <Price>180</Price>
-    <InStock>1</InStock>
+    <InStock>5</InStock>
   </Book>
   <Book Code="104">
     <Title>Red Tide</Title>
