@@ -79,7 +79,6 @@ namespace BookStore.Web.Controllers
             Customer currentUser = AuthorizeHelper.GetCurrentUser();
             if (currentUser != null)
             {
-
                 try
                 {
                     MailMessage mail = new MailMessage();
