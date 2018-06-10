@@ -3,17 +3,11 @@ using BookStore.DataAccess;
 using BookStore.Models;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace BookStore.UnitTest.DataAccess
+namespace BookStore.UnitTest
 {
     [TestClass]
     public class BookDAOTest
     {
-        [TestInitialize]
-        [TestCleanup]
-        public void CleanUp()
-        {
-        }
-
         [TestMethod]
         public void GetAll()
         {
@@ -34,6 +28,22 @@ namespace BookStore.UnitTest.DataAccess
             Assert.AreEqual("Book2", book.Title);
             Assert.IsNotNull(book.Pic);
             Assert.IsFalse(book.HasDiscount);
+        }
+
+        [TestMethod]
+        public void Search()
+        {
+            List<Book> books = BookDAO.Search("book");
+            Assert.AreEqual(2, books.Count);
+
+            books = BookDAO.Search("book2");
+            Assert.AreEqual(1, books.Count);
+
+            books = BookDAO.Search("author2");
+            Assert.AreEqual(1, books.Count);
+
+            books = BookDAO.Search("author10");
+            Assert.AreEqual(0, books.Count);
         }
 
         [TestMethod]

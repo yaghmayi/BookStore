@@ -7,8 +7,8 @@
     <ProjectGuid>{7A8463F0-7058-4EAA-B3E2-B678683013D1}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Models</RootNamespace>
-    <AssemblyName>Models</AssemblyName>
+    <RootNamespace>BookStore.Models</RootNamespace>
+    <AssemblyName>BookStore.Models</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

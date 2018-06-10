@@ -9,8 +9,8 @@
     <ProjectGuid>{16A4FC1D-26EB-4D09-97B2-5B8EE1D70964}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>LightStore.Tests</RootNamespace>
-    <AssemblyName>LightStore.Tests</AssemblyName>
+    <RootNamespace>BookStore.UnitTest</RootNamespace>
+    <AssemblyName>BookStore.UnitTest</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -84,6 +84,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BookDAOTest.cs" />
+    <Compile Include="BookServiceTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -116,9 +117,9 @@
       <Project>{7a8463f0-7058-4eaa-b3e2-b678683013d1}</Project>
       <Name>Models</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Web\Web.csproj">
-      <Project>{fe057eba-af9d-421b-8141-3d7b8d824218}</Project>
-      <Name>Web</Name>
+    <ProjectReference Include="..\Services1\Services.csproj">
+      <Project>{2cd4dddc-01dc-45a0-aee2-3c961d45bc68}</Project>
+      <Name>Services</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

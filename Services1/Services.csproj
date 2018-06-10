@@ -7,8 +7,8 @@
     <ProjectGuid>{2CD4DDDC-01DC-45A0-AEE2-3C961D45BC68}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Services1</RootNamespace>
-    <AssemblyName>Services1</AssemblyName>
+    <RootNamespace>BookStore.Service</RootNamespace>
+    <AssemblyName>BookStore.Service</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
