@@ -17,12 +17,12 @@
         <div class="container">
             <div class="col-xs-6 well">
                 @{
-                    string message = "Your payment has been done succeffuly." + "<br/>" + "The receipt number: <b>" + @Model.Number + "</b>";
+                    string message = "Your payment has been done successffuly." + "<br/>" + "The receipt number is: <b>" + @Model.Number + "</b>";
                 }
                 
                 @if (AuthorizeHelper.GetCurrentUser() != null)
                 {
-                    message += "<br/>" + "The receipt was laso sent to your email.";
+                    message += "<br/>" + "The receipt was also sent to your email.";
                 }
                 
                 @BookStotreHtmHelper.DisplayMessage(message)

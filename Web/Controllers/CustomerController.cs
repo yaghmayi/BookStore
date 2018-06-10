@@ -79,22 +79,30 @@ namespace BookStore.Web.Controllers
             Customer currentUser = AuthorizeHelper.GetCurrentUser();
             if (currentUser != null)
             {
-                MailMessage mail = new MailMessage();
-                SmtpClient SmtpServer = new SmtpClient("smtp.gmail.com");
 
-                mail.From = new MailAddress("fooemail6@gmail.com");
-                mail.To.Add(currentUser.Email);
+                try
+                {
+                    MailMessage mail = new MailMessage();
+                    SmtpClient SmtpServer = new SmtpClient("smtp.gmail.com");
+
+                    mail.From = new MailAddress("fooemail6@gmail.com");
+                    mail.To.Add(currentUser.Email);
 
 
-                mail.Subject = "Book Store Receipt Number";
-                mail.Body = string.Format("Book Store Receipt.{0}Receipt Number: {1}{0}Amount:{2}{0}Date: {3}-{4}{0}Time: {5}",
-                                          Environment.NewLine, receipt.Number, receipt.SaleAmount, receipt.Date.ToShortDateString(), receipt.Date.DayOfWeek, receipt.Time);
+                    mail.Subject = "Book Store Receipt Number";
+                    mail.Body = string.Format("Book Store Receipt.{0}Receipt Number: {1}{0}Amount:{2}{0}Date: {3}-{4}{0}Time: {5}",
+                                              Environment.NewLine, receipt.Number, receipt.SaleAmount, receipt.Date.ToShortDateString(), receipt.Date.DayOfWeek, receipt.Time);
 
-                SmtpServer.Port = 587;
-                SmtpServer.Credentials = new System.Net.NetworkCredential("fooemail6@gmail.com", "fooemail1234");
-                SmtpServer.EnableSsl = true;
+                    SmtpServer.Port = 587;
+                    SmtpServer.Credentials = new System.Net.NetworkCredential("fooemail6@gmail.com", "fooemail1234");
+                    SmtpServer.EnableSsl = true;
 
-                SmtpServer.Send(mail);
+                    SmtpServer.Send(mail);
+                }
+                catch (Exception ex)
+                {
+                    //We should handel the exception in future.
+                }
             }
 
             return View(receipt);
