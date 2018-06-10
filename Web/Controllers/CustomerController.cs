@@ -68,7 +68,7 @@ namespace BookStore.Web.Controllers
             else if (ConfigurationManager.AppSettings[DataKeys.RefererPage] != null)
                 return ConfigurationManager.AppSettings[DataKeys.RefererPage];
             else
-                return "/Product/ListBooks";
+                return "/Book/ListBooks";
         }
 
 
