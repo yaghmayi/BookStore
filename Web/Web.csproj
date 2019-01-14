@@ -82,6 +82,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\Customers.xml" />
     <Content Include="App_Data\Books.xml" />
     <Content Include="App_Data\Images\101.jpg" />
     <Content Include="App_Data\Images\102.jpg" />

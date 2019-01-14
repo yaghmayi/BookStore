@@ -2,8 +2,9 @@
 {
     $.ajax({
         url: '/Customer/Login/',
-        data: { email: email, password : password },
+        data: { email: email, password: password },
+        complete: function (jqXHR, status) {
+            window.location.reload(false);
+        }
     });
-
-    window.location.reload(false);
 }

@@ -13,7 +13,13 @@ namespace BookStore.Web.Controllers
     {
         public void SignUp(string email, string password, string repassword)
         {
-            if (password == repassword && !CustomerDAO.IsExist(email))
+            Session[DataKeys.Error] = null;
+
+            if (password != repassword)
+                Session[DataKeys.Error] = "Mismatch password.";
+            else if (CustomerDAO.IsExist(email))
+                Session[DataKeys.Error] = "Current email is exists.";
+            else
             {
                 Customer customer = new Customer();
                 customer.Email = email;
@@ -27,13 +33,17 @@ namespace BookStore.Web.Controllers
 
         public void Login(string email, string password)
         {
-            Customer customer = CustomerDAO.Get(email);
+            Session[DataKeys.Error] = null;
+
+            Customer customer = CustomerDAO.Get(email, password);
             
             if (customer != null)
             {
                 Session[DataKeys.User] = customer;
                 Session[DataKeys.RefererPage] = Request.UrlReferrer;
             }
+            else
+                Session[DataKeys.Error] = "Incorrect email or password.";
         }
 
         [HttpGet]

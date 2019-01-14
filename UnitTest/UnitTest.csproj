@@ -85,11 +85,15 @@
   <ItemGroup>
     <Compile Include="BookDAOTest.cs" />
     <Compile Include="BookServiceTest.cs" />
+    <Compile Include="CustomerDAOTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App.config" />
     <Content Include="Data\Books.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\Customers.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Data\Images\101.jpg">

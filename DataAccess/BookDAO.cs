@@ -1,6 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
+﻿using System.Collections.Generic;
+
 using System.IO;
 using System.Xml;
 using System.Xml.Serialization;
@@ -10,28 +9,19 @@ namespace BookStore.DataAccess
 {
     public static class BookDAO
     {
-        private static String dataFolder
+        private static string imageFolder
         {
             get
             {
-                String dataSourceFolder = ConfigurationManager.AppSettings.Get("DataSourceFolder");
-
-                return AppDomain.CurrentDomain.BaseDirectory + "//" + dataSourceFolder;
+                return DAOHelper.dataFolder + "//Images";
             }
         }
 
-        private static String imageFolder
+        private static string dataFilePath
         {
             get
             {
-                return dataFolder + "//Images";
-            }
-        }
-        private static String dataFilePath
-        {
-            get
-            {
-                return dataFolder + "//Books.xml";
+                return DAOHelper.dataFolder + "//Books.xml";
             }
         }
 
@@ -43,7 +33,7 @@ namespace BookStore.DataAccess
 
             foreach  (Book book in books)
             {
-                String imageFilePath = imageFolder + "//" + book.Code + ".jpg";
+                string imageFilePath = imageFolder + "//" + book.Code + ".jpg";
                 if (File.Exists(imageFilePath))
                     book.Pic = File.ReadAllBytes(imageFilePath);
                 else
@@ -103,13 +93,13 @@ namespace BookStore.DataAccess
             return book != null;
         }
 
-        public static List<Book> Search(String searchTrem)
+        public static List<Book> Search(string searchTrem)
         {
             List<Book> books = GetAll();
 
             if (!string.IsNullOrEmpty(searchTrem))
             {
-                String txt = searchTrem.ToLower().Trim();
+                string txt = searchTrem.ToLower().Trim();
 
                 books = books.FindAll(bk => !string.IsNullOrEmpty(bk.Title) &&
                                             (bk.Title.ToLower().Contains(txt) || bk.Author.ToLower().Contains(txt)));

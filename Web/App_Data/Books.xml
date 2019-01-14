@@ -13,7 +13,7 @@
     <Author>Michael Sanford</Author>
     <Description>It is an interesting legend.</Description>
     <Price>190</Price>
-    <InStock>2</InStock>
+    <InStock>0</InStock>
   </Book>
   <Book Code="103">
     <Title>The Migrant</Title>
@@ -21,7 +21,7 @@
     <Description>It is a book about the problems of migrants.</Description>
     <Price>350</Price>
     <Discount>15</Discount>
-    <InStock>7</InStock>
+    <InStock>5</InStock>
   </Book>
   <Book Code="110">
     <Title>Diapers</Title>
@@ -35,14 +35,14 @@
     <Author>Marie Kelly</Author>
     <Description>When Tara James finds out her soon-to-be-famous movie star sister needs her, she drops everything to rush to her aid.  While the twins might have very different lives, it is the fact they are identical which allows her to stand in for Susan Sunny. </Description>
     <Price>115</Price>
-    <InStock>29</InStock>
+    <InStock>25</InStock>
   </Book>
   <Book Code="119">
     <Title>The Perfectionist</Title>
     <Author>Rafe Oropella</Author>
     <Description>The Perfectionist is an ex-CIA operative who isn’t ready for retirement yet. His lifelong dream is to seek out and find the lost Nazi gold, smuggled during World War II. To do so, he needs a large amount of capital. </Description>
     <Price>95</Price>
-    <InStock>26</InStock>
+    <InStock>25</InStock>
   </Book>
   <Book Code="114">
     <Title>Joy of Life Paperback</Title>

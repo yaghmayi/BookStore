@@ -3,85 +3,117 @@
 
 <html>
 <head>
-    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-    <script src="~/Content/Scripts/GetSetSession.js"></script>
-    <script src="~/Content/Scripts/LoadShopItemsCount.js"></script>
-    <script src="~/Content/Scripts/Search.js"></script>
+	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+	<script src="~/Content/Scripts/GetSetSession.js"></script>
+	<script src="~/Content/Scripts/LoadShopItemsCount.js"></script>
+	<script src="~/Content/Scripts/Search.js"></script>
+
+	<script type='text/javascript'>
+		function setSearchTerm() {
+			var qString = location.search;
+
+			if (qString.indexOf('searchTerm') != -1)
+			{	
+				var index = qString.indexOf('searchTerm=') + "searchTerm=".length;	
+				var data = qString.substring(index);
+				data = data.replace("%20", " ");
+
+				if (data.indexOf('&') != -1) {		
+					data = data.substring(0, data.indexOf('&'));		
+				}
+
+				document.getElementById("searchTextBox").value = data;
+				document.getElementById("searchTextBox").focus();
+			}
+		}
+	</script>
 </head>
 
-    <nav class="navbar navbar-inverse">
-        <div class="container-fluid">
-            <div class="navbar-header" style="margin-left: 5px">
-                <span style="font-size: xx-large; color: white;">
-                    <a href="/Book/ListBooks">Book Store</a>
-                </span>
-            </div>
-            <div>
-                <ul class="nav navbar-nav">
-                    <li>
-                        <span class="input-group" style="max-width: 400px; margin-top: 5px; margin-left: 5px">
-                            <input id="searchTextBox" type="text" placeholder="" class="form-control" onkeydown="if (event.keyCode == 13) { Search() }">
-                            <span class="input-group-btn">
-                                <button class="btn btn-default" type="button" id="searchButton" onclick="Search()">
-                                    <i class="glyphicon glyphicon-search"></i>
-                                </button>
-                            </span>
-                        </span>
-                    </li>
-                </ul>
+	<body onload="setSearchTerm()">
+		<nav class="navbar navbar-inverse">
+			<div class="container-fluid">
+				<div class="navbar-header" style="margin-left: 5px">
+					<span style="font-size: xx-large; color: white;">
+						<a href="/Book/ListBooks">Book Store</a>
+					</span>
+				</div>
+				<div>
+					<ul class="nav navbar-nav">
+						<li>
+							<span class="input-group" style="max-width: 400px; margin-top: 5px; margin-left: 5px">
+								<input id="searchTextBox" type="text" placeholder="" class="form-control"
+									   onkeydown="if (event.keyCode == 13) { Search() }">
+								<span class="input-group-btn">
+									<button class="btn btn-default" type="button" id="searchButton" onclick="Search()">
+										<i class="glyphicon glyphicon-search"></i>
+									</button>
+								</span>
+							</span>
+						</li>
+					</ul>
 
-                <ul class="nav navbar-nav navbar-right">
-                    @if (Session[DataKeys.User] != null)
-                    {
-                        Customer customer = (Customer)Session[DataKeys.User];
-                        
+                    <ul class="nav navbar-nav navbar-right">
+                        @if (Session[DataKeys.Error] != null)
+                        {
+                            <li>
+                                <a style="color: red">
+                                    @Session[DataKeys.Error]
+                                </a>
+                            </li>
+                        }
+
+                        @if (Session[DataKeys.User] != null)
+                        {
+                            Customer customer = (Customer) Session[DataKeys.User];
+
+                            <li class="dropdown">
+                                <a class="dropdown-toggle" data-toggle="dropdown">
+                                    <span class="glyphicon glyphicon-user"></span>
+                                    @customer.Email
+                                    <span class="caret"></span>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <a href="/Customer/Logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a>
+                                    </li>
+                                </ul>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="dropdown">
+                                <a class="dropdown-toggle" href="#" data-toggle="dropdown" id="navSignUp">
+                                    <span class="glyphicon glyphicon-user"></span> Sign Up
+                                </a>
+                                <div class="dropdown-menu" style="padding:17px;">
+                                    @Html.Partial("SignUp")
+                                </div>
+                            </li>
+
+                            <li class="dropdown" id="menuLogin">
+                                <a class="dropdown-toggle" 1 href="#" data-toggle="dropdown" id="navLogin">
+                                    <span class="glyphicon glyphicon-log-in"></span> Login
+                                </a>
+                                <div class="dropdown-menu" style="padding:17px;">
+                                    @Html.Partial("Login")
+                                </div>
+                            </li>
+                        }
+
                         <li class="dropdown">
-                            <a class="dropdown-toggle" data-toggle="dropdown">
-                                <span class="glyphicon glyphicon-user"></span>
-                                @customer.Email
-                                <span class="caret"></span>
+                            <a class="dropdown-toggle" href="/Customer/ShopList" id="navLogin">
+                                <span class="glyphicon glyphicon-shopping-cart"></span> Buy
+                                <span id="shopItemsCount" style="color: greenyellow; font-weight: bold; font-size: large"></span>
+                                <script type="text/javascript">
+                                    LoadShopItesmCount();
+                                </script>
                             </a>
-                            <ul class="dropdown-menu">
-                                <li>
-                                    <a href="/Customer/Logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a>
-                                </li>
-                            </ul>
                         </li>
-                    }
-                    else
-                    {
-                        <li class="dropdown">
-                            <a class="dropdown-toggle" href="#" data-toggle="dropdown" id="navSignUp">
-                                <span class="glyphicon glyphicon-user"></span> Sign Up
-                            </a>
-                            <div class="dropdown-menu" style="padding:17px;">
-                                @Html.Partial("SignUp")
-                            </div>
-                        </li>
-
-                        <li class="dropdown" id="menuLogin">
-                            <a class="dropdown-toggle"1 href="#" data-toggle="dropdown" id="navLogin">
-                                <span class="glyphicon glyphicon-log-in"></span> Login
-                            </a>
-                            <div class="dropdown-menu" style="padding:17px;">
-                                @Html.Partial("Login")
-                            </div>
-                        </li>
-                    }
-
-                    <li class="dropdown">
-                        <a class="dropdown-toggle" href="/Customer/ShopList" id="navLogin">
-                            <span class="glyphicon glyphicon-shopping-cart"></span> Buy
-                            <span id="shopItemsCount" style="color: greenyellow; font-weight: bold; font-size: large"></span>
-                            <script type="text/javascript">
-                                LoadShopItesmCount();
-                            </script>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
+                    </ul>
+				</div>
+			</div>
+		</nav>
+	</body>
 </html>

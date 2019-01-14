@@ -2,11 +2,9 @@
 {
     $.ajax({
         url: '/Customer/SignUp/',
-        data: { email: email, password : password, repassword : repassword },
+        data: { email: email, password: password, repassword: repassword },
+        complete: function (jqXHR, status) {
+            window.location.reload(false);
+        }
     });
-
-    window.location.reload(false);
-    
-    
-//    window.location.href = window.location.pathname ;
 }

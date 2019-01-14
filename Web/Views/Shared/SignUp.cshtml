@@ -1,4 +1,5 @@
-﻿@{
+﻿@using BookStore.Web
+@{
     ViewBag.Title = "Register";
 }
 
@@ -21,16 +22,18 @@
             <div style="float: left">
                 <input type="password" name="UserPassword" id="UserPassword" placeholder="Password" class="form-control" />
             </div>
-        
+
             <div style="float: left">
                 <input type="password" name="UserRepassword" id="UserRepassword" placeholder="Re Password" class="form-control" />
             </div>
-            
+
             <div style="clear: both; float: left; margin-top: 10px" />
-            
+
             <div style="clear: both">
                 <button type="button" class="btn btn-default" data-toggle="modal" data-target=".bs-example-modal-sm"
-                        onclick="SignUp(document.getElementById('UserEmail').value, document.getElementById('UserPassword').value, document.getElementById('UserRepassword').value)">
+                        onclick="SignUp(document.getElementById('UserEmail').value,
+                                        document.getElementById('UserPassword').value,
+                                        document.getElementById('UserRepassword').value)">
                     Sign Up
                 </button>
             </div>
