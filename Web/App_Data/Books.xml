@@ -6,7 +6,7 @@
     <Description>It is a physological book.</Description>
     <Price>260</Price>
     <Discount>15</Discount>
-    <InStock>10</InStock>
+    <InStock>1</InStock>
   </Book>
   <Book Code="102">
     <Title>Tarzan</Title>
@@ -21,21 +21,21 @@
     <Description>It is a book about the problems of migrants.</Description>
     <Price>350</Price>
     <Discount>15</Discount>
-    <InStock>5</InStock>
+    <InStock>1</InStock>
   </Book>
   <Book Code="110">
     <Title>Diapers</Title>
     <Author>Michael Sanford</Author>
     <Description>Are you a busy parent who needs help trying to manage it all? Let busy mom of two, Jan Cornell teach you how to live your life in a more simple and meaningful way with her fun, practical, quick and easy hacks. There are better and more efficient ways to manage both your life as a busy parent and your household! If you are a busy parent in the midst of chaos, this book was written for you!</Description>
     <Price>145</Price>
-    <InStock>8</InStock>
+    <InStock>1</InStock>
   </Book>
   <Book Code="120">
     <Title>Subtitle</Title>
     <Author>Marie Kelly</Author>
     <Description>When Tara James finds out her soon-to-be-famous movie star sister needs her, she drops everything to rush to her aid.  While the twins might have very different lives, it is the fact they are identical which allows her to stand in for Susan Sunny. </Description>
     <Price>115</Price>
-    <InStock>25</InStock>
+    <InStock>1</InStock>
   </Book>
   <Book Code="119">
     <Title>The Perfectionist</Title>
@@ -50,7 +50,7 @@
     <Description>
     </Description>
     <Price>100</Price>
-    <InStock>30</InStock>
+    <InStock>2</InStock>
   </Book>
   <Book Code="118">
     <Title>They Were Shining</Title>
@@ -65,7 +65,7 @@
     <Description>Sixty-seven-year-old Ben Willows prefers the company of a dog to that of most people. So, now that his wife June, an exception in the people category with whom hes shared most of his life, has died, he assumes hell live out his days keeping to himself and making the best of what a solitary life has to offer.</Description>
     <Price>270</Price>
     <Discount>25</Discount>
-    <InStock>29</InStock>
+    <InStock>1</InStock>
   </Book>
   <Book Code="112">
     <Title>To Free the Fox</Title>
@@ -73,14 +73,14 @@
     <Description>Alitha Helgren a college student, whose life so far has been rocky, but ordinary, goes to spend the summer at her deceased grandmothers cottage. While there she begins to experience some unusual things.</Description>
     <Price>250</Price>
     <Discount>15</Discount>
-    <InStock>27</InStock>
+    <InStock>1</InStock>
   </Book>
   <Book Code="111">
     <Title>The Imposter</Title>
     <Author>Sarah Pratt</Author>
     <Description>Amidst the chaos left in back alleyways and side streets, the Marker wages war against corruption in the crime-ridden metropolitan city of Ashden.</Description>
     <Price>420</Price>
-    <InStock>0</InStock>
+    <InStock>1</InStock>
   </Book>
   <Book Code="109">
     <Title>Ten Minute Tales</Title>
@@ -96,7 +96,7 @@
     <Description>It is beautiful story for all people.</Description>
     <Price>310</Price>
     <Discount>30</Discount>
-    <InStock>2</InStock>
+    <InStock>0</InStock>
   </Book>
   <Book Code="107">
     <Title>Favourite Carols</Title>
