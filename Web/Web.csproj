@@ -112,6 +112,7 @@
     <Content Include="Content\Scripts\Search.js" />
     <Content Include="Content\Scripts\DeleteShopItem.js" />
     <Content Include="Content\Scripts\modals.js" />
+    <Content Include="Content\Scripts\GetBookStock.js" />
     <Content Include="Content\Scripts\ShowPaymentDialog.js" />
     <Content Include="Content\Scripts\LoadShopItemsCount.js" />
     <Content Include="Content\Scripts\SignUp.js" />
@@ -119,7 +120,7 @@
     <Content Include="Content\Bootstrap\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Content\Bootstrap\js\bootstrap-slider.js" />
     <Content Include="Content\Scripts\AddShopItem.js" />
-    <Content Include="Content\Scripts\GetSetSession.js" />
+    <Content Include="Content\Scripts\Session.js" />
     <Content Include="Content\Site.css" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />

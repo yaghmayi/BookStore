@@ -1,4 +1,4 @@
-﻿var temp;
+﻿var sessionValue;
 
 function GetSession(id) {
     $.ajax({
@@ -6,11 +6,11 @@ function GetSession(id) {
         data: { id: id },
         async: false,
         success: function (data) {
-            temp = data;
+            sessionValue = data;
         }
     });
     
-    return temp;
+    return sessionValue;
 }
 
 function SetSession(id, val) {

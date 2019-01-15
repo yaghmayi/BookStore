@@ -69,6 +69,15 @@ namespace BookStore.Web.Controllers
             return new ImageResult(book.Pic);
         }
 
+        public int GetBookStock(int id)
+        {
+            Book book = BookDAO.Get(id);
+            if (book != null)
+                return book.InStock;
+            else
+                return 0;
+        }
+
         public string GetSession(string id)
         {
             if (Session[id] != null)
