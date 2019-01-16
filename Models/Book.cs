@@ -12,6 +12,7 @@ namespace BookStore.Models
         public string Author { get; set; }
         public int InStock { get; set; }
 
+        [XmlIgnore]
         public byte[] Pic
         {
             get { return pic; } 

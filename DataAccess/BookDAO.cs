@@ -1,35 +1,28 @@
-﻿using System.Collections.Generic;
-
+﻿using System;
+using System.Collections.Generic;
+using System.Configuration;
 using System.IO;
-using System.Xml;
-using System.Xml.Serialization;
 using BookStore.Models;
 
 namespace BookStore.DataAccess
 {
     public static class BookDAO
     {
+        private static DAOHelper<Book> daoHelper  = new DAOHelper<Book>("Books", "Code");
+
         private static string imageFolder
         {
             get
             {
-                return DAOHelper.dataFolder + "//Images";
-            }
-        }
+                string dataSourceFolder = ConfigurationManager.AppSettings.Get("DataSourceFolder");
 
-        private static string dataFilePath
-        {
-            get
-            {
-                return DAOHelper.dataFolder + "//Books.xml";
+                return AppDomain.CurrentDomain.BaseDirectory + "\\" + dataSourceFolder + "\\Images";
             }
         }
 
         public static List<Book> GetAll()
         {
-            XmlSerializer desSerializer = new XmlSerializer(typeof(List<Book>), new XmlRootAttribute("Books"));
-            StreamReader xmlReader = new StreamReader(dataFilePath);
-            List<Book> books = (List<Book>) desSerializer.Deserialize(xmlReader);
+            List<Book> books = daoHelper.GetAll();
 
             foreach  (Book book in books)
             {
@@ -39,8 +32,6 @@ namespace BookStore.DataAccess
                 else
                     book.Pic = File.ReadAllBytes(imageFolder + "//defaultImage.jpg");
             }
-
-            xmlReader.Close();
 
             return books;
         }
@@ -60,13 +51,8 @@ namespace BookStore.DataAccess
                 Book book = Get(code);
                 if (book.InStock > 0)
                 {
-                    XmlDocument xmlDoc = new XmlDocument();
-                    xmlDoc.Load(dataFilePath);
-                    XmlNode inStockNode = xmlDoc.SelectSingleNode("Books/Book[@Code=" + code + "]/InStock"); 
-                    int inStock = int.Parse(inStockNode.InnerText);
-                    inStockNode.InnerText = (inStock - 1).ToString();
-
-                    xmlDoc.Save(dataFilePath);
+                    book.InStock = book.InStock - 1;
+                    daoHelper.Save(book);
                 }
             }
         }
@@ -75,13 +61,10 @@ namespace BookStore.DataAccess
         {
             if (IsExist(code))
             {
-                XmlDocument xmlDoc = new XmlDocument();
-                xmlDoc.Load(dataFilePath);
-                XmlNode inStockNode = xmlDoc.SelectSingleNode("Books/Book[@Code=" + code + "]/InStock");
-                int inStock = int.Parse(inStockNode.InnerText);
-                inStockNode.InnerText = (inStock + boughtItems).ToString();
+                Book book = Get(code);
+                book.InStock = book.InStock + boughtItems;
 
-                xmlDoc.Save(dataFilePath);
+                daoHelper.Save(book);
             }
         }
 
