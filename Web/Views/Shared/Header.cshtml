@@ -3,32 +3,31 @@
 
 <html>
 <head>
-	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-	<script src="~/Content/Scripts/GetSetSession.js"></script>
-	<script src="~/Content/Scripts/LoadShopItemsCount.js"></script>
-	<script src="~/Content/Scripts/Search.js"></script>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="~/Content/Bootstrap/js/bootstrap.min.js"></script>
+    <script src="~/Content/Scripts/Session.js"></script>
+    <script src="~/Content/Scripts/LoadShopItemsCount.js"></script>
+    <script src="~/Content/Scripts/Search.js"></script>
 
-	<script type='text/javascript'>
-		function setSearchTerm() {
-			var qString = location.search;
+    <script type='text/javascript'>
+        function setSearchTerm() {
+            var qString = location.search;
 
-			if (qString.indexOf('searchTerm') != -1)
-			{	
-				var index = qString.indexOf('searchTerm=') + "searchTerm=".length;	
-				var data = qString.substring(index);
-				data = data.replace("%20", " ");
+            if (qString.indexOf('searchTerm') != -1) {
+                var index = qString.indexOf('searchTerm=') + "searchTerm=".length;
+                var data = qString.substring(index);
+                data = data.replace("%20", " ");
 
-				if (data.indexOf('&') != -1) {		
-					data = data.substring(0, data.indexOf('&'));		
-				}
+                if (data.indexOf('&') != -1) {
+                    data = data.substring(0, data.indexOf('&'));
+                }
 
-				document.getElementById("searchTextBox").value = data;
-				document.getElementById("searchTextBox").focus();
-			}
-		}
-	</script>
+                document.getElementById("searchTextBox").value = data;
+                document.getElementById("searchTextBox").focus();
+            }
+        }
+    </script>
 </head>
 
 	<body onload="setSearchTerm()">
