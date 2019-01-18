@@ -9,5 +9,6 @@
         public static string RefererPage = "RefererPage";
         public static string Receipt = "Receipt";
         public static string Error = "Error";
+        public static string ExpandView = "ExpandView";
     }
 }

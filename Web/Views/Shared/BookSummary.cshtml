@@ -7,58 +7,82 @@
     <script src="~/Content/Scripts/AddShopItem.js"></script>
 </head>
 
-<div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
-    <div class="well">
-        <div style="float: left; width: 50%">
-            <img src="/Book/ShowPhoto/@Model.Code" style="height: 100px;" />
-        </div>
+@{
+    string panelClass = "col-lg-4 col-md-6 col-sm-6 col-xs-12";
+    string imageSize = "100px";
+    bool expandMode = false;
 
-        <div style="height: 2px"></div>
+    if (ViewData.ContainsKey(DataKeys.ExpandView) && ((bool)ViewData[DataKeys.ExpandView] == true))
+    {
+        expandMode = true;
+        panelClass = "col-xs-12";
+        imageSize = "150px";
+    }
+}
 
-        <div style="padding-top: 5px">
-            <h5>
-                @Html.ActionLink(Model.Title, "ShowBook", new { id = @Model.Code })
-            </h5>
-            by <I>@Model.Author</I>
-        </div>
+<div class="@panelClass">
+    <div class="well" style="display: flex">
 
-        <div>
-            @BookStotreHtmHelper.DisplayPrice(@Model.Price, @Model.Discount)
-        </div>
+        <div style="float: left; width: 40%;">
+            <div>
+                <img src="/Book/ShowPhoto/@Model.Code" style="height: @imageSize;" />
+            </div>
 
-        <div style="padding-top: 5px">
-            @if (Model.InStock > 0)
-            {
-                <h5>
-                    <span id="@BookStotreHtmHelper.Contact("spnBookStock-", @Model.Code.ToString())">
-                        <b>@Model.InStock</b> Items are available.
+            <div style="padding-top: 10px">
+                @if (Model.InStock > 0)
+                {
+                    <input type="button" id="@BookStotreHtmHelper.Contact("btnAdd-", @Model.Code.ToString())"
+                           class="btn btn-default" data-toggle="modal" data-target=".bs-example-modal-sm"
+                           onclick="AddShopItem(@Model.Code)" value="Add">
+
+                    <span id="@BookStotreHtmHelper.Contact("prg", @Model.Code.ToString())" style="display: none">
+                        <b>Added</b>
                     </span>
-                </h5>
-            }
-            else
-            {
+                }
+                else
+                {
+                    <input type="button" disabled="disabled" class="btn btn-default" value="Add">
+                }
+            </div>
+        </div>
+
+        <div style="float: left; width: 60%;">
+            <div>
                 <h5>
-                    <b>No</b> Item is available.
+                    @Html.ActionLink(Model.Title, "ShowBook", new { id = @Model.Code })
                 </h5>
+                by <I>@Model.Author</I>
+            </div>
+
+            @if (expandMode)
+            {
+                <div style="padding-top: 3px; padding-bottom: 5px">
+                    <I>@Model.Description</I>
+                </div>
             }
+
+            <div>
+                @BookStotreHtmHelper.DisplayPrice(@Model.Price, @Model.Discount)
+            </div>
+
+            <div style="padding-top: 5px">
+                @if (Model.InStock > 0)
+                {
+                    <h5>
+                        <span id="@BookStotreHtmHelper.Contact("spnBookStock-", @Model.Code.ToString())">
+                            <b>@Model.InStock</b> Items are available.
+                        </span>
+                    </h5>
+                }
+                else
+                {
+                    <h5>
+                        <b>No</b> Item is available.
+                    </h5>
+                }
+            </div>
         </div>
 
-        <div style="padding-top: 2px">
-            @if (Model.InStock > 0)
-            {
-                <input type="button" id="@BookStotreHtmHelper.Contact("btnAdd-", @Model.Code.ToString())"
-                        class="btn btn-default" data-toggle="modal" data-target=".bs-example-modal-sm"
-                        onclick="AddShopItem(@Model.Code)" value="Add">
-
-                <span id="@BookStotreHtmHelper.Contact("prg", @Model.Code.ToString())" style="display: none">
-                    <b>Added</b>
-                </span>
-            }
-            else
-            {
-                <input type="button" disabled="disabled" class="btn btn-default" value="Add">
-            }
-        </div>
     </div>
 </div>
 

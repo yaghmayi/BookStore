@@ -10,76 +10,10 @@
 
 <div class="container">
     <div class="col-sm-12">
-        <h2>@Model.Title</h2>
-    </div>
-    <div class="col-sm-12" style="border: solid gainsboro; padding: 0px; padding-left: 3px">
-        <div class="col-sm-6">
-            <div class="row clearfix">
-                <div class="col-xs-12">
-                    <img src="/Book/ShowPhoto/@Model.Code" />
-                </div>
-            </div>
-
-            <div class="row clearfix">
-                <div class="col-xs-12">
-                    <br />
-                    by <I>@Model.Author</I>
-                </div>
-            </div>
-            
-           
-
-            <div class="row clearfix">
-                <div class="col-xs-12">
-                    @BookStotreHtmHelper.DisplayPrice(@Model.Price, @Model.Discount)
-                </div>
-            </div>
-            
-            <div style="padding-top: 5px">
-                @if (Model.InStock > 0)
-                {
-                    <h5>
-                        <b>@Model.InStock</b>  Items are available.
-                    </h5>
-                }
-                else
-                {
-                    <h5>
-                        <b>No</b> Item is available.
-                    </h5>
-                }
-            </div>
-
-            <div class="row clearfix">
-                <div class="col-xs-12">
-                    <br />
-                </div>
-            </div>
-
-            <div class="row clearfix">
-                <div class="col-xs-12">
-                    <I>@Model.Description</I>
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    <div style="padding-left: 5px">
-        @if (Model.InStock > 0)
-        {
-            <button type="button" class="btn btn-default" data-toggle="modal" data-target=".bs-example-modal-sm" onclick="AddShopItem(@Model.Code)">
-                Add
-            </button>
-
-            <span id="@BookStotreHtmHelper.Contact("prg", @Model.Code.ToString())" style="display: none">
-                <b>Added</b>
-            </span>
-        }
-        else
-        {
-            <button type="button" disabled="disabled" class="btn btn-default">
-                Add
-            </button>
+        @{
+            ViewDataDictionary viewDataDictionary = new ViewDataDictionary();
+            viewDataDictionary.Add(DataKeys.ExpandView, true);
+            @Html.Partial("BookSummary", @Model, viewDataDictionary)
         }
     </div>
 
@@ -87,3 +21,4 @@
         @Html.ActionLink("Back to List", "ListBooks")
     </div>
 </div>
+
