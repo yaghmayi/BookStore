@@ -109,6 +109,7 @@
     <Content Include="Content\Bootstrap\css\bootstrap-slider.css" />
     <Content Include="Content\Bootstrap\css\CircleButtons.css" />
     <Content Include="Content\Bootstrap\js\bootstrap.min.js" />
+    <Content Include="Content\JQuery_1.11.1\jquery.min.js" />
     <Content Include="Content\Scripts\Search.js" />
     <Content Include="Content\Scripts\DeleteShopItem.js" />
     <Content Include="Content\Scripts\modals.js" />
