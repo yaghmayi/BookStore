@@ -69,7 +69,7 @@ namespace BookStore.Web.Controllers
 
             Order order = CommonUtils.GetOrder(customerEmail, bookCodes);
             OrderDAO.Save(order);
-            TempData[DataKeys.Receipt] = order;
+            TempData[DataKeys.Order] = order;
             Session[DataKeys.ShopItems] = null;
             Session[DataKeys.ShopItemsCount] = null;
 
@@ -90,7 +90,7 @@ namespace BookStore.Web.Controllers
         [HttpGet]
         public ActionResult ShowReceipt()
         {
-            Order order = (Order) TempData[DataKeys.Receipt];
+            Order order = (Order) TempData[DataKeys.Order];
             Customer currentUser = AuthorizeHelper.GetCurrentUser();
             if (currentUser != null)
             {
