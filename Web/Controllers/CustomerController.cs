@@ -63,7 +63,11 @@ namespace BookStore.Web.Controllers
         public ActionResult ShopList(string dummyParameter)
         {
             List<int> bookCodes = (List<int>)Session[DataKeys.ShopItems];
-            Order order = CommonUtils.GetOrder(bookCodes);
+            string customerEmail = null;
+            if (Session[DataKeys.User] != null)
+                customerEmail = ((Customer) Session[DataKeys.User]).Email;
+
+            Order order = CommonUtils.GetOrder(customerEmail, bookCodes);
             OrderDAO.Save(order);
             TempData[DataKeys.Receipt] = order;
             Session[DataKeys.ShopItems] = null;

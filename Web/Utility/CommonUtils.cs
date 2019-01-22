@@ -7,7 +7,7 @@ namespace BookStore.Web
 {
     public class CommonUtils
     {
-        public static Order GetOrder(List<int> bookCodes)
+        public static Order GetOrder(string customerEmail, List<int> bookCodes)
         {
             DateTime today = DateTime.Now;
             decimal totalAmount = 0;
@@ -20,6 +20,7 @@ namespace BookStore.Web
             }
 
             Order order = new Order();
+            order.CustomerEmail = customerEmail;
             order.TotalAmount = totalAmount;
             order.SaleAmount = saleAmount;
             order.Date = today;

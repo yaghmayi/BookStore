@@ -23,6 +23,7 @@ namespace BookStore.UnitTest
             order.TotalAmount = 200;
             order.addOrderItem(10, "Harry Pater", 1); 
             order.addOrderItem(20, "English in usagae", 2);
+            order.CustomerEmail = "jim@yahoo.com";
             OrderDAO.Save(order);
 
             orders = OrderDAO.GetAll();
@@ -30,6 +31,7 @@ namespace BookStore.UnitTest
 
             order = orders[0];
             Assert.AreEqual(1001, order.ReceiptNumber);
+            Assert.AreEqual("jim@yahoo.com", order.CustomerEmail);
             Assert.AreEqual(2, order.OrderItems.Count);
             OrderItem orderItem = order.OrderItems[0];
             Assert.IsNotNull(orderItem);
