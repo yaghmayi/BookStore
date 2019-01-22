@@ -6,7 +6,7 @@
     <Description>It is a physological book.</Description>
     <Price>260</Price>
     <Discount>15</Discount>
-    <InStock>1</InStock>
+    <InStock>14</InStock>
   </Book>
   <Book Code="102">
     <Title>Tarzan</Title>
@@ -21,7 +21,7 @@
     <Description>It is a book about the problems of migrants.</Description>
     <Price>350</Price>
     <Discount>15</Discount>
-    <InStock>1</InStock>
+    <InStock>15</InStock>
   </Book>
   <Book Code="110">
     <Title>Diapers</Title>
@@ -35,7 +35,7 @@
     <Author>Marie Kelly</Author>
     <Description>When Tara James finds out her soon-to-be-famous movie star sister needs her, she drops everything to rush to her aid.  While the twins might have very different lives, it is the fact they are identical which allows her to stand in for Susan Sunny. </Description>
     <Price>115</Price>
-    <InStock>1</InStock>
+    <InStock>21</InStock>
   </Book>
   <Book Code="119">
     <Title>The Perfectionist</Title>
@@ -104,7 +104,7 @@
     <Description>The first collection specifically of the WORDS of well-known carols since John Stainers shorter  volume a century ago: as good for  street singers  we know the tunes already but need the words -</Description>
     <Price>230</Price>
     <Discount>10</Discount>
-    <InStock>2</InStock>
+    <InStock>21</InStock>
   </Book>
   <Book Code="106">
     <Title>The Snarky Puppy</Title>
@@ -118,13 +118,13 @@
     <Author>Omar Epps</Author>
     <Description>Author and world renowned actor Omar Epps chronicles his journey from humble beginnings in Brooklyn, New York, to the bright lights of Hollywood. </Description>
     <Price>180</Price>
-    <InStock>5</InStock>
+    <InStock>15</InStock>
   </Book>
   <Book Code="104">
     <Title>Red Tide</Title>
     <Author>John Alexander</Author>
     <Description>pace Navy Lieutenant Sally Fenway survives a terrorist attack on Times Square in New York City.</Description>
     <Price>150</Price>
-    <InStock>2</InStock>
+    <InStock>32</InStock>
   </Book>
 </Books>
