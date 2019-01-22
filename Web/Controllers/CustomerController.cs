@@ -62,9 +62,10 @@ namespace BookStore.Web.Controllers
         [HttpPost]
         public ActionResult ShopList(string dummyParameter)
         {
-            List<int> productCodes = (List<int>)Session[DataKeys.ShopItems];
-            Receipt receipt = CommonUtils.GetReceipt(productCodes);
-            TempData[DataKeys.Receipt] = receipt;
+            List<int> bookCodes = (List<int>)Session[DataKeys.ShopItems];
+            Order order = CommonUtils.GetOrder(bookCodes);
+            OrderDAO.Save(order);
+            TempData[DataKeys.Receipt] = order;
             Session[DataKeys.ShopItems] = null;
             Session[DataKeys.ShopItemsCount] = null;
 
@@ -85,7 +86,7 @@ namespace BookStore.Web.Controllers
         [HttpGet]
         public ActionResult ShowReceipt()
         {
-            Receipt receipt = (Receipt) TempData[DataKeys.Receipt];
+            Order order = (Order) TempData[DataKeys.Receipt];
             Customer currentUser = AuthorizeHelper.GetCurrentUser();
             if (currentUser != null)
             {
@@ -98,9 +99,9 @@ namespace BookStore.Web.Controllers
                     mail.To.Add(currentUser.Email);
 
 
-                    mail.Subject = "Book Store Receipt Number";
-                    mail.Body = string.Format("Book Store Receipt.{0}Receipt Number: {1}{0}Amount:{2}{0}Date: {3}-{4}{0}Time: {5}",
-                                              Environment.NewLine, receipt.Number, receipt.SaleAmount, receipt.Date.ToShortDateString(), receipt.Date.DayOfWeek, receipt.Time);
+                    mail.Subject = "Book Store Order ReceiptNumber";
+                    mail.Body = string.Format("Book Store Order.{0}Order ReceiptNumber: {1}{0}Amount:{2}{0}Date: {3}-{4}{0}Time: {5}",
+                                              Environment.NewLine, order.ReceiptNumber, order.SaleAmount, order.Date.ToShortDateString(), order.Date.DayOfWeek, order.Time);
 
                     SmtpServer.Port = 587;
                     SmtpServer.Credentials = new System.Net.NetworkCredential("fooemail6@gmail.com", "fooemail1234");
@@ -114,7 +115,7 @@ namespace BookStore.Web.Controllers
                 }
             }
 
-            return View(receipt);
+            return View(order);
         }
 
 

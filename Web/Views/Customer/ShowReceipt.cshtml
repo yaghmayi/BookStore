@@ -2,7 +2,7 @@
 @using BookStore.Models
 @using BookStore.Web
 @using BookStore.Web.Security
-@model BookStore.Models.Receipt
+@model BookStore.Models.Order
 
 @{
     ViewBag.Title = "FinishShop";
@@ -17,7 +17,7 @@
         <div class="container">
             <div class="col-xs-6 well">
                 @{
-                    string message = "Your payment has been done successffuly." + "<br/>" + "The receipt number is: <b>" + @Model.Number + "</b>";
+                    string message = "Your payment has been done successffuly." + "<br/>" + "The receipt number is: <b>" + @Model.ReceiptNumber + "</b>";
                 }
                 
                 @if (AuthorizeHelper.GetCurrentUser() != null)

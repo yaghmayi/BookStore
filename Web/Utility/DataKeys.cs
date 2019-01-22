@@ -7,7 +7,7 @@
         public static string User = "User";
         public static string Books = "Books";
         public static string RefererPage = "RefererPage";
-        public static string Receipt = "Receipt";
+        public static string Receipt = "Order";
         public static string Error = "Error";
         public static string ExpandView = "ExpandView";
     }

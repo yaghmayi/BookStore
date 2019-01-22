@@ -44,7 +44,7 @@
     <Compile Include="CustomerDAO.cs" />
     <Compile Include="BookDAO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ReceiptDAO.cs" />
+    <Compile Include="OrderDAO.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Models\Models.csproj">

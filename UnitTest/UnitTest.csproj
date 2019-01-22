@@ -87,14 +87,14 @@
     <Compile Include="BookServiceTest.cs" />
     <Compile Include="CustomerDAOTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ReceiptDAOTest.cs" />
+    <Compile Include="OrderDAOTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App.config" />
     <Content Include="Data\Books.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Data\Receipts.xml">
+    <Content Include="Data\Orders.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Data\Customers.xml">

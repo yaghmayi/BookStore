@@ -93,7 +93,10 @@ namespace BookStore.DataAccess
 
             using (XmlWriter writer = doc.CreateNavigator().AppendChild())
             {
-                new XmlSerializer(item.GetType()).Serialize(writer, item);
+                XmlSerializer serializer = new XmlSerializer(item.GetType());
+                XmlSerializerNamespaces ns = new XmlSerializerNamespaces();
+                ns.Add("", "");
+                serializer.Serialize(writer, item, ns);
             }
 
             return doc.DocumentElement;

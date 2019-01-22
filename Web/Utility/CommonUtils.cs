@@ -7,25 +7,38 @@ namespace BookStore.Web
 {
     public class CommonUtils
     {
-        public static Receipt GetReceipt(List<int> productCodes)
+        public static Order GetOrder(List<int> bookCodes)
         {
             DateTime today = DateTime.Now;
             decimal totalAmount = 0;
             decimal saleAmount = 0;
-            foreach (int productCode in productCodes)
+            foreach (int productCode in bookCodes)
             {
                 Book product = BookDAO.Get(productCode);
                 totalAmount += product.Price;
                 saleAmount += product.SalePrice;
             }
 
-            Receipt receipt = new Receipt();
-            receipt.TotalAmount = totalAmount;
-            receipt.SaleAmount = saleAmount;
-            receipt.Date = today;
-            receipt.Number = Math.Abs(today.GetHashCode());
+            Order order = new Order();
+            order.TotalAmount = totalAmount;
+            order.SaleAmount = saleAmount;
+            order.Date = today;
+            order.ReceiptNumber = Math.Abs(today.GetHashCode());
 
-            return receipt;
+            foreach (int bookCode in bookCodes)
+            {
+                OrderItem orderItem = order.OrderItems.Find(item => item.BookCode == bookCode);
+                if (orderItem != null)
+                    orderItem.Quantity++;
+                else
+                {
+                    Book book = BookDAO.Get(bookCode);
+                    order.addOrderItem(book.Code, book.Title, 1);
+                }
+            }
+                
+
+            return order;
 
         }
     }
