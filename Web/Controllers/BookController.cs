@@ -11,7 +11,7 @@ namespace BookStore.Web.Controllers
 {
     public partial class BookController : Controller
     {
-        [HttpGet]
+        [HttpPost]
         public void AddShopItem(int id)
         {
             if (Session[DataKeys.ShopItems] == null)
@@ -27,7 +27,7 @@ namespace BookStore.Web.Controllers
             Session[DataKeys.ShopItemsCount] = count + 1;
         }
 
-        [HttpGet]
+        [HttpPost]
         public void DeleteShopItem(int id)
         {
             if (Session[DataKeys.ShopItems] == null)
@@ -52,23 +52,23 @@ namespace BookStore.Web.Controllers
             ViewData[DataKeys.Books] = task.Result;
 
             return View();
-
         }
 
+        [HttpGet]
         public ActionResult ShowBook(int id)
         {
             Book book = BookDAO.Get(id);
             return View(book);
         }
 
-
-        [AcceptVerbs(HttpVerbs.Get)]
+        [HttpGet]
         public ActionResult ShowPhoto(int id)
         {
             Book book = BookDAO.Get(id);
             return new ImageResult(book.Pic);
         }
 
+        [HttpGet]
         public int GetBookStock(int id)
         {
             Book book = BookDAO.Get(id);
@@ -78,6 +78,7 @@ namespace BookStore.Web.Controllers
                 return 0;
         }
 
+        [HttpGet]
         public string GetSession(string id)
         {
             if (Session[id] != null)
@@ -86,6 +87,7 @@ namespace BookStore.Web.Controllers
                 return null;
         }
 
+        [HttpPost]
         public void SetSession(string id, string value)
         {
             Session[id] = value;

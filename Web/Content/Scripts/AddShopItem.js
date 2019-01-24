@@ -2,6 +2,7 @@
 {
     $.ajax({
         url: '/Book/AddShopItem/',
+        type: "POST",
         data: { id: bookCode },
         complete: function (jqXHR, status) {
             var spanShopItemsCount = $("#shopItemsCount");

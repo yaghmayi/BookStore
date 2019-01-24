@@ -2,6 +2,7 @@
 {
     $.ajax({
         url: '/Book/DeleteShopItem/',
+        type: "POST",
         data: { id: bookCode },
     });
 

@@ -1,4 +1,5 @@
-﻿@{
+﻿@using BookStore.Web
+@{
     ViewBag.Title = "Login";
 }
 
@@ -10,26 +11,40 @@
 </head>
 
 <html>
-    <form style="min-width: 200px">
-        <div class="col-xs-12">
-
-            <div style="float: left; ">
-                <input type="text" name="Email" id="Email" class="form-control" placeholder="Email" />
-            </div>
-
-            <div style="float: left; ">
-                <input type="password" name="Password" id="Password" class="form-control" placeholder="Password" />
-            </div>
-
-            <div style="clear: both; float: left; margin-top: 10px" />
-
-            <div style="clear: both; float: left">
-                <button type="button" class="btn btn-default" data-toggle="modal" data-target=".bs-example-modal-sm"
-                        onclick="Login(document.getElementById('Email').value, document.getElementById('Password').value)">
-                    Login
-                </button>
-            </div>
+<form style="min-width: 200px">
+    @{
+        string panelClass = "col-lg-12";
+        if (CommonUtils.GetCurrentPageName() == "Login".ToLower())
+        {
+            panelClass = "col-sm-12 col-md-6";
+        }
+    }
+    <div class="@panelClass">
+        <div>
+            <input type="text" name="Email" id="Email" class="form-control" placeholder="Email"/>
         </div>
-    
-    </form>
+
+        <div>
+            <input type="password" name="Password" id="Password" class="form-control" placeholder="Password"/>
+        </div>
+
+        <div style="margin-top: 10px"/>
+
+        <div>
+            @{
+                string redirectPage = "";
+                if (CommonUtils.GetCurrentPageName() == "Login".ToLower())
+                {
+                    redirectPage = "ShopList";
+                }
+            }
+
+            <button type="button" class="btn btn-default" data-toggle="modal" data-target=".bs-example-modal-sm"
+                    onclick="Login(document.getElementById('Email').value, document.getElementById('Password').value, '@redirectPage')">
+                Login
+            </button>
+        </div>
+    </div>
+
+</form>
 </html>

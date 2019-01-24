@@ -38,9 +38,22 @@ namespace BookStore.Web
                 }
             }
                 
-
             return order;
+        }
 
+        public static string GetCurrentPageName()
+        {
+            string path = System.Web.HttpContext.Current.Request.Url.AbsolutePath;
+            return GetPageName(path);
+        }
+
+        public static string GetPageName(string urlPath)
+        {
+            int index = urlPath.LastIndexOf('/');
+            if (index != -1)
+                return urlPath.Substring(index + 1).ToLower();
+            else
+                return urlPath.ToLower();
         }
     }
 }

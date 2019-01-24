@@ -80,7 +80,7 @@
                                 </ul>
                             </li>
                         }
-                        else
+                        else if (CommonUtils.GetCurrentPageName() != "Login".ToLower())
                         {
                             <li class="dropdown">
                                 <a class="dropdown-toggle" href="#" data-toggle="dropdown" id="navSignUp">
@@ -101,15 +101,25 @@
                             </li>
                         }
 
-                        <li class="dropdown">
-                            <a class="dropdown-toggle" href="/Customer/ShopList" id="navLogin">
-                                <span class="glyphicon glyphicon-shopping-cart"></span> Buy
-                                <span id="shopItemsCount" style="color: greenyellow; font-weight: bold; font-size: large"></span>
-                                <script type="text/javascript">
-                                    LoadShopItesmCount();
-                                </script>
-                            </a>
-                        </li>
+                            <li class="dropdown">
+                                @{
+                                    string targetName = "Login";
+
+                                    if (Session[DataKeys.User] != null)
+                                    {
+                                        targetName = "ShopList";
+                                    }
+                                }
+                                
+
+                                <a class="dropdown-toggle" href="/Customer/@targetName" id="navLogin">
+                                    <span class="glyphicon glyphicon-shopping-cart"></span> Buy
+                                    <span id="shopItemsCount" style="color: greenyellow; font-weight: bold; font-size: large"></span>
+                                    <script type="text/javascript">
+                                        LoadShopItesmCount();
+                                    </script>
+                                </a>
+                            </li>
                     </ul>
 				</div>
 			</div>

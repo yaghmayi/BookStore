@@ -3,6 +3,7 @@
 function GetSession(id) {
     $.ajax({
         url: '/Book/GetSession/',
+        type: "GET",
         data: { id: id },
         async: false,
         success: function (data) {
@@ -16,6 +17,7 @@ function GetSession(id) {
 function SetSession(id, val) {
     $.ajax({
         url: '/Book/SetSession/',
+        type: "POST",
         data: { id: id, value: val },
         success: function (data) {
         }

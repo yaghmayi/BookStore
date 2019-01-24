@@ -11,6 +11,7 @@ namespace BookStore.Web.Controllers
 {
     public class CustomerController : Controller
     {
+        [HttpPost]
         public void SignUp(string email, string password, string repassword)
         {
             Session[DataKeys.Error] = null;
@@ -31,6 +32,13 @@ namespace BookStore.Web.Controllers
             }
         }
 
+        [HttpGet]
+        public ActionResult Login()
+        {
+            return View();
+        }
+
+        [HttpPost]
         public void Login(string email, string password)
         {
             Session[DataKeys.Error] = null;
@@ -50,7 +58,12 @@ namespace BookStore.Web.Controllers
         public ActionResult Logout()
         {
             Session["User"] = null;
-            return Redirect(GetRefererPage());
+            string refererUrl = GetRefererUrl();
+            string refererPageName = CommonUtils.GetPageName(refererUrl);
+            if (refererPageName != "Login".ToLower() && refererPageName != "ShopList".ToLower())
+                return Redirect(GetRefererUrl());
+            else
+                return Redirect("/Book/ListBooks");
         }
 
         [HttpGet]
@@ -75,17 +88,6 @@ namespace BookStore.Web.Controllers
 
             return Redirect("ShowReceipt");
         }
-
-        private string GetRefererPage()
-        {
-            if (Session[DataKeys.RefererPage] != null)
-                return Session[DataKeys.RefererPage].ToString();
-            else if (ConfigurationManager.AppSettings[DataKeys.RefererPage] != null)
-                return ConfigurationManager.AppSettings[DataKeys.RefererPage];
-            else
-                return "/Book/ListBooks";
-        }
-
 
         [HttpGet]
         public ActionResult ShowReceipt()
@@ -122,6 +124,14 @@ namespace BookStore.Web.Controllers
             return View(order);
         }
 
-
+        private string GetRefererUrl()
+        {
+            if (Session[DataKeys.RefererPage] != null)
+                return Session[DataKeys.RefererPage].ToString();
+            else if (ConfigurationManager.AppSettings[DataKeys.RefererPage] != null)
+                return ConfigurationManager.AppSettings[DataKeys.RefererPage];
+            else
+                return "/Book/ListBooks";
+        }
     }
 }

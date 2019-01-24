@@ -85,6 +85,7 @@
   <ItemGroup>
     <Compile Include="BookDAOTest.cs" />
     <Compile Include="BookServiceTest.cs" />
+    <Compile Include="CommonUtilsTest.cs" />
     <Compile Include="CustomerDAOTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="OrderDAOTest.cs" />
@@ -128,6 +129,10 @@
     <ProjectReference Include="..\Services\Services.csproj">
       <Project>{2cd4dddc-01dc-45a0-aee2-3c961d45bc68}</Project>
       <Name>Services</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Web\Web.csproj">
+      <Project>{fe057eba-af9d-421b-8141-3d7b8d824218}</Project>
+      <Name>Web</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
