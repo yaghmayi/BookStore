@@ -84,7 +84,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BookDAOTest.cs" />
-    <Compile Include="BookServiceTest.cs" />
     <Compile Include="CommonUtilsTest.cs" />
     <Compile Include="CustomerDAOTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -125,10 +124,6 @@
     <ProjectReference Include="..\Models\Models.csproj">
       <Project>{7a8463f0-7058-4eaa-b3e2-b678683013d1}</Project>
       <Name>Models</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Services\Services.csproj">
-      <Project>{2cd4dddc-01dc-45a0-aee2-3c961d45bc68}</Project>
-      <Name>Services</Name>
     </ProjectReference>
     <ProjectReference Include="..\Web\Web.csproj">
       <Project>{fe057eba-af9d-421b-8141-3d7b8d824218}</Project>

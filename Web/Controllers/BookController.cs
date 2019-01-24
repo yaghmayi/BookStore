@@ -4,7 +4,6 @@ using System.Threading.Tasks;
 using System.Web.Mvc;
 using BookStore.DataAccess;
 using BookStore.Models;
-using BookStore.Services;
 using BookStore.Web.Controllers.Base;
 
 namespace BookStore.Web.Controllers
@@ -47,9 +46,7 @@ namespace BookStore.Web.Controllers
         [HttpGet]
         public ActionResult ListBooks(String searchTerm)
         {
-            BookService bookService = new BookService();
-            Task<IEnumerable<IBook>> task = bookService.GetBooksAsync(searchTerm);
-            ViewData[DataKeys.Books] = task.Result;
+            ViewData[DataKeys.Books] = BookDAO.GetAll();
 
             return View();
         }
