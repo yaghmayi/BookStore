@@ -1,7 +1,4 @@
-﻿@using BookStore.DataAccess
-@using BookStore.Models
-@using BookStore.Web
-@using BookStore.Web.Security
+﻿@using BookStore.Web
 @model BookStore.Models.Order
 
 @{
@@ -17,12 +14,10 @@
         <div class="container">
             <div class="col-xs-6 well">
                 @{
-                    string message = "Your payment has been done successffuly." + "<br/>" + "The receipt number is: <b>" + @Model.ReceiptNumber + "</b>";
-                }
-                
-                @if (AuthorizeHelper.GetCurrentUser() != null)
-                {
-                    message += "<br/>" + "The receipt was also sent to your email.";
+                    string message = "Your payment has been done successffuly." + 
+                                     "<br/>" + 
+                                     "The receipt number is: <b>" + @Model.ReceiptNumber + "</b>" +
+                                     "<br/>" + "The receipt was also sent to your email.";
                 }
                 
                 @BookStotreHtmHelper.DisplayMessage(message)
@@ -32,9 +27,7 @@
                 @Html.ActionLink("Return", "ListBooks", "Book", new { categoryCode = 4 }, null)
             </div>
         </div>
-       
     </form>
-
 </html>
 
 
