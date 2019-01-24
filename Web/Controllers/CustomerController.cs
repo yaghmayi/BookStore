@@ -58,10 +58,10 @@ namespace BookStore.Web.Controllers
         public ActionResult Logout()
         {
             Session["User"] = null;
-            string refererUrl = GetRefererUrl();
+            string refererUrl = getRefererUrl();
             string refererPageName = CommonUtils.GetPageName(refererUrl);
             if (refererPageName != "Login".ToLower() && refererPageName != "ShopList".ToLower())
-                return Redirect(GetRefererUrl());
+                return Redirect(getRefererUrl());
             else
                 return Redirect("/Book/ListBooks");
         }
@@ -86,6 +86,8 @@ namespace BookStore.Web.Controllers
             Session[DataKeys.ShopItems] = null;
             Session[DataKeys.ShopItemsCount] = null;
 
+            sendReceiptToCustomerEmail(order);
+
             return Redirect("ShowReceipt");
         }
 
@@ -93,38 +95,11 @@ namespace BookStore.Web.Controllers
         public ActionResult ShowReceipt()
         {
             Order order = (Order) TempData[DataKeys.Order];
-            Customer currentUser = AuthorizeHelper.GetCurrentUser();
-            if (currentUser != null)
-            {
-                try
-                {
-                    MailMessage mail = new MailMessage();
-                    SmtpClient SmtpServer = new SmtpClient("smtp.gmail.com");
-
-                    mail.From = new MailAddress("BookStore.SE@gmail.com");
-                    mail.To.Add(currentUser.Email);
-
-
-                    mail.Subject = "Book Store Order ReceiptNumber";
-                    mail.Body = string.Format("Book Store Order.{0}Order ReceiptNumber: {1}{0}Amount:{2}{0}Date: {3}-{4}{0}Time: {5}",
-                                              Environment.NewLine, order.ReceiptNumber, order.SaleAmount, order.Date.ToShortDateString(), order.Date.DayOfWeek, order.Time);
-
-                    SmtpServer.Port = 587;
-                    SmtpServer.Credentials = new System.Net.NetworkCredential("BookStore.SE@gmail.com", "bs123456bs");
-                    SmtpServer.EnableSsl = true;
-
-                    SmtpServer.Send(mail);
-                }
-                catch (Exception ex)
-                {
-                    //We should handel the exception in future.
-                }
-            }
 
             return View(order);
         }
 
-        private string GetRefererUrl()
+        private string getRefererUrl()
         {
             if (Session[DataKeys.RefererPage] != null)
                 return Session[DataKeys.RefererPage].ToString();
@@ -132,6 +107,34 @@ namespace BookStore.Web.Controllers
                 return ConfigurationManager.AppSettings[DataKeys.RefererPage];
             else
                 return "/Book/ListBooks";
+        }
+
+        private void sendReceiptToCustomerEmail(Order order)
+        {
+            try
+            {
+                Customer currentUser = AuthorizeHelper.GetCurrentUser();
+                MailMessage mail = new MailMessage();
+                SmtpClient SmtpServer = new SmtpClient("smtp.gmail.com");
+
+                mail.From = new MailAddress("BookStore.SE@gmail.com");
+                mail.To.Add(currentUser.Email);
+
+
+                mail.Subject = "Book Store ReceiptNumber - " + order.ReceiptNumber;
+                mail.Body = string.Format("Book Store Order.{0}Order ReceiptNumber: {1}{0}Amount:{2}{0}Date: {3}-{4}{0}Time: {5}",
+                    Environment.NewLine, order.ReceiptNumber, order.SaleAmount, order.Date.ToShortDateString(), order.Date.DayOfWeek, order.Time);
+
+                SmtpServer.Port = 587;
+                SmtpServer.Credentials = new System.Net.NetworkCredential("BookStore.SE@gmail.com", "bs123456bs");
+                SmtpServer.EnableSsl = true;
+
+                SmtpServer.Send(mail);
+            }
+            catch (Exception ex)
+            {
+                //We should handel the exception in future.
+            }
         }
     }
 }
