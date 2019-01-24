@@ -101,7 +101,7 @@ namespace BookStore.Web.Controllers
                     MailMessage mail = new MailMessage();
                     SmtpClient SmtpServer = new SmtpClient("smtp.gmail.com");
 
-                    mail.From = new MailAddress("fooemail6@gmail.com");
+                    mail.From = new MailAddress("BookStore.SE@gmail.com");
                     mail.To.Add(currentUser.Email);
 
 
@@ -110,7 +110,7 @@ namespace BookStore.Web.Controllers
                                               Environment.NewLine, order.ReceiptNumber, order.SaleAmount, order.Date.ToShortDateString(), order.Date.DayOfWeek, order.Time);
 
                     SmtpServer.Port = 587;
-                    SmtpServer.Credentials = new System.Net.NetworkCredential("fooemail6@gmail.com", "fooemail1234");
+                    SmtpServer.Credentials = new System.Net.NetworkCredential("BookStore.SE@gmail.com", "bs123456bs");
                     SmtpServer.EnableSsl = true;
 
                     SmtpServer.Send(mail);
