@@ -54,15 +54,6 @@
 					</ul>
 
                     <ul class="nav navbar-nav navbar-right">
-                        @if (Session[DataKeys.Error] != null)
-                        {
-                            <li>
-                                <a style="color: red">
-                                    @Session[DataKeys.Error]
-                                </a>
-                            </li>
-                        }
-
                         @if (Session[DataKeys.User] != null)
                         {
                             Customer customer = (Customer) Session[DataKeys.User];
@@ -80,7 +71,7 @@
                                 </ul>
                             </li>
                         }
-                        else if (CommonUtils.GetCurrentPageName() != "Login".ToLower())
+                        else if (CommonUtils.GetCurrentPageName() != "Login".ToLower() && CommonUtils.GetCurrentPageName() != "SignUp".ToLower())
                         {
                             <li class="dropdown">
                                 <a class="dropdown-toggle" href="#" data-toggle="dropdown" id="navSignUp">

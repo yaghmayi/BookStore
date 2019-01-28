@@ -12,7 +12,16 @@
 
 <html>
     <form>
-        <div class="col-xs-12" style="min-width: 200px">
+        @{
+            string panelClass = "col-lg-12";
+            bool signUpUrl = CommonUtils.GetCurrentPageName() == "SignUp".ToLower();
+
+            if (signUpUrl)
+            {
+                panelClass = "col-sm-12 col-md-6";
+            }
+        }
+        <div class="@panelClass" style="min-width: 200px">
 
             <div>
                 <input type="text" name="UserEmail" id="UserEmail" placeholder="Email" class="form-control" />
@@ -29,12 +38,23 @@
             <div style="margin-top: 10px" />
 
             <div>
+                @{
+                    string redirectPage = "";
+                    if (signUpUrl)
+                    {
+                        redirectPage = "ShopList";
+                    }
+                }
+
                 <button type="button" class="btn btn-default" data-toggle="modal" data-target=".bs-example-modal-sm"
-                        onclick="SignUp(document.getElementById('UserEmail').value,
-                                        document.getElementById('UserPassword').value,
-                                        document.getElementById('UserRepassword').value)">
+                        onclick="SignUp(document.getElementById('UserEmail').value, document.getElementById('UserPassword').value, document.getElementById('UserRepassword').value, '@redirectPage')">
                     Sign Up
                 </button>
+            </div>
+
+            <div style="margin-top: 2px" />
+
+            <div id="signUpFailMessage">
             </div>
         </div>
     </form>

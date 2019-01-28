@@ -46,7 +46,7 @@ namespace BookStore.Web.Controllers
         [HttpGet]
         public ActionResult ListBooks(String searchTerm)
         {
-            ViewData[DataKeys.Books] = BookDAO.GetAll();
+            ViewData[DataKeys.Books] = BookDAO.Search(searchTerm);
 
             return View();
         }

@@ -11,6 +11,12 @@ namespace BookStore.Web.Controllers
 {
     public class CustomerController : Controller
     {
+        [HttpGet]
+        public ActionResult SignUp()
+        {
+            return View();
+        }
+
         [HttpPost]
         public void SignUp(string email, string password, string repassword)
         {
@@ -121,7 +127,7 @@ namespace BookStore.Web.Controllers
                 mail.To.Add(currentUser.Email);
 
 
-                mail.Subject = "Book Store ReceiptNumber - " + order.ReceiptNumber;
+                mail.Subject = "Book Store Receipt - " + order.ReceiptNumber;
                 mail.Body = string.Format("Book Store Order.{0}Order ReceiptNumber: {1}{0}Amount:{2}{0}Date: {3}-{4}{0}Time: {5}",
                     Environment.NewLine, order.ReceiptNumber, order.SaleAmount, order.Date.ToShortDateString(), order.Date.DayOfWeek, order.Time);
 
