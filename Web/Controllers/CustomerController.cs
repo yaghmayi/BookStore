@@ -22,7 +22,13 @@ namespace BookStore.Web.Controllers
         {
             Session[DataKeys.Error] = null;
 
-            if (password != repassword)
+            if (email == null || email.Trim() == "")
+                Session[DataKeys.Error] = "Email field is required.";
+            else if (password == null || password.Trim() == "")
+                Session[DataKeys.Error] = "Password field is required.";
+            else if (repassword == null || repassword.Trim() == "")
+                Session[DataKeys.Error] = "Re-Password field is required.";
+            else if (password != repassword)
                 Session[DataKeys.Error] = "Mismatch password.";
             else if (CustomerDAO.IsExist(email))
                 Session[DataKeys.Error] = "Current email is exists.";
@@ -49,15 +55,22 @@ namespace BookStore.Web.Controllers
         {
             Session[DataKeys.Error] = null;
 
-            Customer customer = CustomerDAO.Get(email, password);
-            
-            if (customer != null)
-            {
-                Session[DataKeys.User] = customer;
-                Session[DataKeys.RefererPage] = Request.UrlReferrer;
-            }
+            if (email == null || email.Trim() == "")
+                Session[DataKeys.Error] = "Email field is required.";
+            else if (password == null || password.Trim() == "")
+                Session[DataKeys.Error] = "Password field is required.";
             else
-                Session[DataKeys.Error] = "Incorrect email or password.";
+            {
+                Customer customer = CustomerDAO.Get(email, password);
+
+                if (customer != null)
+                {
+                    Session[DataKeys.User] = customer;
+                    Session[DataKeys.RefererPage] = Request.UrlReferrer;
+                }
+                else
+                    Session[DataKeys.Error] = "Incorrect email or password.";
+            }
         }
 
         [HttpGet]
