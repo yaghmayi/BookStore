@@ -43,8 +43,8 @@
                             totalSalePrice += book.SalePrice;
                             rowClass = (rowIndex % 2 == 0) ? "alternativeRow" : null;
                             <tr class="@rowClass">
-                                <td>
-                                    <img src="/Book/ShowPhoto/@book.Code" style="height: 100px;" />
+                                <td style="padding-bottom: 2px; padding-top: 2px">
+                                    <img src="/Book/ShowPhoto/@book.Code" style="width: 50px;" />
                                 </td>
                                 <td>
                                     @Html.ActionLink(book.Title, "ShowBook", "Book", new { id = book.Code }, null)
@@ -62,6 +62,12 @@
                             rowIndex = rowIndex + 1;
                         }
                     }
+                    
+                    <tr>
+                        <td colspan="6">
+                            <hr />
+                        </td>
+                    </tr>
 
                     <tr>
                         <td colspan="3"></td>
