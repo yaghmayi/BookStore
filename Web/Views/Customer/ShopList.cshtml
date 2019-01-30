@@ -16,8 +16,6 @@
         <script src="~/Content/Scripts/DeleteShopItem.js"></script>
     </head>
 
-
-    
         <div class="container">
             <div class="col-sm-12">
                 <table width="100%" style="border: solid gainsboro">
@@ -74,17 +72,21 @@
                         <td><b>Total Price:</b></td>
                         <td>
                             @BookStotreHtmHelper.DisplayPrice(totalPrice, totalSalePrice)
+                            
+                            @if (Session[DataKeys.ShopItemsCount] != null && ((int)Session[DataKeys.ShopItemsCount]) > 0)
+                            {
+                                <button type="button" class="dropdown btn btn-default" id="menuLogin" style="max-width: 100px">
 
-                            <button type="button" class="dropdown btn btn-default" id="menuLogin" style="max-width: 100px">
-                                <a class="dropdown-toggle" href="#" data-toggle="dropdown" id="navLogin">
-                                    <span class="glyphicon glyphicon-credit-card" aria-hidden="true"></span> Payment
-                                </a>
+                                    <a class="dropdown-toggle" href="#" data-toggle="dropdown" id="navLogin">
+                                        <span class="glyphicon glyphicon-credit-card" aria-hidden="true"></span> Payment
+                                    </a>
 
-                                <div class="dropdown-menu" style="padding:17px;">
-                                    @Html.Partial("Payment")
-                                </div>
+                                    <div class="dropdown-menu" style="padding:17px;">
+                                        @Html.Partial("Payment")
+                                    </div>
 
-                            </button>
+                                </button>
+                            }
                         </td>
                         <td></td>
                     </tr>
