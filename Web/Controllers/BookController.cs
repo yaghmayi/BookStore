@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 using BookStore.DataAccess;
@@ -44,9 +45,18 @@ namespace BookStore.Web.Controllers
         }
 
         [HttpGet]
-        public ActionResult ListBooks(String searchTerm)
+        public ActionResult ListBooks(String searchTerm, int? page)
         {
-            ViewData[DataKeys.Books] = BookDAO.Search(searchTerm);
+            int bookItemsCountInEachPage = int.Parse(ConfigurationManager.AppSettings.Get("BookItemsCountInEachPage"));
+
+            List<Book> bookItems = BookDAO.Search(searchTerm);
+            int pageNumbers = (int) Math.Ceiling((decimal) bookItems.Count / bookItemsCountInEachPage);
+            ViewData[DataKeys.BooksPageNumbers] = pageNumbers;
+
+            int pageNumber = page != null ? page.Value : 1;
+            ViewData[DataKeys.Books] = BookDAO.Search(searchTerm, pageNumber, bookItemsCountInEachPage);
+            ViewData[DataKeys.CurrentPage] = pageNumber;
+            ViewData[DataKeys.SearchTerm] = searchTerm;
 
             return View();
         }

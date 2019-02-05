@@ -36,6 +36,13 @@ namespace BookStore.DataAccess
             return books;
         }
 
+        public static List<Book> GetAll(int pageNumber, int pageItemsCount)
+        {
+            List<Book> books = daoHelper.GetAll(pageNumber, pageItemsCount);
+
+            return books;
+        }
+
         public static Book Get(int code)
         {
             List<Book> books = GetAll();
@@ -89,6 +96,15 @@ namespace BookStore.DataAccess
             }
 
             return books;
+        }
+
+        public static List<Book> Search(string searchTrem, int pageNumber, int pageItemsCount)
+        {
+            List<Book> books = Search(searchTrem);
+            List<Book> pageItems = daoHelper.GetItems(books, pageNumber, pageItemsCount);
+
+            return pageItems;
+
         }
     }
 }

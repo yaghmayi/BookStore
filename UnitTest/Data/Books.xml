@@ -14,4 +14,28 @@
     <Price>200</Price>
     <InStock>17</InStock>
   </Book>
+
+  <Book Code="103">
+    <Title>Book3</Title>
+    <Author>Author3</Author>
+    <Price>140</Price>
+    <Discount>15</Discount>
+    <InStock>2</InStock>
+  </Book>
+
+  <Book Code="104">
+    <Title>Book4</Title>
+    <Author>Author4</Author>
+    <Price>20</Price>
+    <InStock>0</InStock>
+  </Book>
+
+  <Book Code="105">
+    <Title>Book5</Title>
+    <Author>Author5</Author>
+    <Price>100</Price>
+    <Discount>0</Discount>
+    <InStock>2</InStock>
+  </Book>
+
 </Books>

@@ -38,15 +38,22 @@ namespace BookStore.DataAccess
             }
         }
 
-        public List<T> GetAll(string dataFilePath)
+        public List<T> GetAll(int pageNumber, int pageIemsCount)
         {
-            XmlSerializer desSerializer = new XmlSerializer(typeof(List<T>), new XmlRootAttribute(this.rootName));
-            StreamReader xmlReader = new StreamReader(dataFilePath);
-            List<T> items = (List<T>)desSerializer.Deserialize(xmlReader);
+            List<T> items = GetAll();
+            List<T> pageItems = GetItems(items, pageNumber, pageIemsCount);
 
-            xmlReader.Close();
+            return pageItems;
+        }
 
-            return items;
+        public List<T> GetItems(List<T> items, int pageNumber, int pageIemsCount)
+        {
+            List<T> pageItems = new List<T>();
+
+            for (int i = (pageNumber - 1) * pageIemsCount; i < pageNumber * pageIemsCount && i < items.Count; i++)
+                pageItems.Add(items[i]);
+
+            return pageItems;
         }
 
         public void Save(object item)
