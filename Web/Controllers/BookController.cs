@@ -62,6 +62,22 @@ namespace BookStore.Web.Controllers
         }
 
         [HttpGet]
+        public ActionResult PageBooks(String searchTerm, int page)
+        {
+            int bookItemsCountInEachPage = int.Parse(ConfigurationManager.AppSettings.Get("BookItemsCountInEachPage"));
+
+            List<Book> bookItems = BookDAO.Search(searchTerm);
+            int pageNumbers = (int)Math.Ceiling((decimal)bookItems.Count / bookItemsCountInEachPage);
+            ViewData[DataKeys.BooksPageNumbers] = pageNumbers;
+
+            ViewData[DataKeys.Books] = BookDAO.Search(searchTerm, page, bookItemsCountInEachPage);
+            ViewData[DataKeys.CurrentPage] = page;
+            ViewData[DataKeys.SearchTerm] = searchTerm;
+
+            return PartialView();
+        }
+
+        [HttpGet]
         public ActionResult ShowBook(int id)
         {
             Book book = BookDAO.Get(id);
