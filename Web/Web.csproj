@@ -114,6 +114,7 @@
     <Content Include="Content\Bootstrap\css\CircleButtons.css" />
     <Content Include="Content\Bootstrap\js\bootstrap.min.js" />
     <Content Include="Content\JQuery_1.11.1\jquery.min.js" />
+    <Content Include="Content\Scripts\RemoveSomeeServerAds.js" />
     <Content Include="Content\Scripts\LoadPageBooks.js" />
     <Content Include="Content\Scripts\Search.js" />
     <Content Include="Content\Scripts\DeleteShopItem.js" />
