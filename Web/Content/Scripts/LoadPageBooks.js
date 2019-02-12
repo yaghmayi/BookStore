@@ -1,7 +1,7 @@
 ﻿function LoadPageBooks(searchText, pageNo)
 {
     var booksPanel = $("#booksPanel");
-    booksPanel.html("Please wait ...");
+    booksPanel.html("<div align=\"center\"><img src=\"/Content/Images/Loading.gif\"/></div>");
 
     $.ajax({
         url: '/Book/PageBooks/',
