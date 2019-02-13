@@ -1,7 +1,26 @@
 ﻿function LoadPageBooks(searchText, pageNo)
 {
+    var i;
+    var pageNumbers = GetSession("BooksPageNumbers");
+    for (i = 1; i <= pageNumbers; i++) {
+        var pageLink = document.getElementById("pageLink_" + i);
+        var hyperLink = document.getElementById("hyperLink_" + i);
+        
+        if (i == pageNo) {
+            pageLink.className = "active";
+//            hyperLink.removeAttribute("onclick");
+        } else {
+            pageLink.removeAttribute("class");
+//            if (searchText != null && searchText != '') {
+//                hyperLink.onclick = "LoadPageBooks('" + searchText + "', " + pageNo + ")";
+//            } else {
+//                hyperLink.onclick = "LoadPageBooks('', " + pageNo + ")";
+//            }
+        }
+    }
+
     var booksPanel = $("#booksPanel");
-    booksPanel.html("<div align=\"center\"><img src=\"/Content/Images/Loading.gif\"/></div>");
+    booksPanel.html("<div align=\"center\"><img src=\"/Content/Images/Loading.gif\"/ width=\"200px\"></div>");
 
     $.ajax({
         url: '/Book/PageBooks/',
@@ -28,3 +47,4 @@
         }
     });
 }
+

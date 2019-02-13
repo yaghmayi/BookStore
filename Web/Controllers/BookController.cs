@@ -52,6 +52,7 @@ namespace BookStore.Web.Controllers
             List<Book> bookItems = BookDAO.Search(searchTerm);
             int pageNumbers = (int) Math.Ceiling((decimal) bookItems.Count / bookItemsCountInEachPage);
             ViewData[DataKeys.BooksPageNumbers] = pageNumbers;
+            Session[DataKeys.BooksPageNumbers] = pageNumbers;
 
             int pageNumber = page != null ? page.Value : 1;
             ViewData[DataKeys.Books] = BookDAO.Search(searchTerm, pageNumber, bookItemsCountInEachPage);
@@ -69,6 +70,7 @@ namespace BookStore.Web.Controllers
             List<Book> bookItems = BookDAO.Search(searchTerm);
             int pageNumbers = (int)Math.Ceiling((decimal)bookItems.Count / bookItemsCountInEachPage);
             ViewData[DataKeys.BooksPageNumbers] = pageNumbers;
+            Session[DataKeys.BooksPageNumbers] = pageNumbers;
 
             ViewData[DataKeys.Books] = BookDAO.Search(searchTerm, page, bookItemsCountInEachPage);
             ViewData[DataKeys.CurrentPage] = page;

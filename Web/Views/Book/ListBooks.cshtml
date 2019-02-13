@@ -1,10 +1,59 @@
 ﻿@using BookStore.Models
 @using BookStore.Web
 
+<head>
+    <script src="~/Content/Scripts/LoadPageBooks.js"></script>
+</head>
+
 <html>
     <form>
         <div id="booksPanel" class="container">
             @Html.Partial("PageBooks")
+        </div>
+        
+        <div align="center">
+            <ul class="pagination">
+                @for (int pageNo = 1; pageNo <= ((int)ViewData[DataKeys.BooksPageNumbers]); pageNo++)
+                {
+                    if (pageNo == (int)ViewData[DataKeys.CurrentPage])
+                    {
+//                        classAtr = "class='active'";
+@*                         <li id="pageLink_@pageNo" class="active"> *@
+@*                             <a id="hyperLink_@pageNo">@pageNo</a> *@
+@*                         </li> *@
+
+                        <li id="pageLink_@pageNo" class="active">
+                            @{
+                                string searchTerm = (string)ViewData[DataKeys.SearchTerm];
+                                if (searchTerm != null && searchTerm.Trim() != "")
+                                {
+                                    <a id="hyperLink_@pageNo" onclick="LoadPageBooks('@searchTerm', @pageNo)">@pageNo</a>
+                                }
+                                else
+                                {
+                                    <a id="hyperLink_@pageNo" onclick="LoadPageBooks('', @pageNo)">@pageNo</a>
+                                }
+                            }
+                        </li>
+                    }
+                    else
+                    {
+                        <li id="pageLink_@pageNo">
+                            @{
+                                string searchTerm = (string)ViewData[DataKeys.SearchTerm];
+                                if (searchTerm != null && searchTerm.Trim() != "")
+                                {
+                                    <a id="hyperLink_@pageNo" onclick="LoadPageBooks('@searchTerm', @pageNo)">@pageNo</a>
+                                }
+                                else
+                                {
+                                    <a id="hyperLink_@pageNo" onclick="LoadPageBooks('', @pageNo)">@pageNo</a>
+                                }
+                            }
+                        </li>
+                    }
+                }
+            </ul>
         </div>
     </form>
 </html>

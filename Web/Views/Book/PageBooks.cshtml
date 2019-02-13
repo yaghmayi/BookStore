@@ -1,11 +1,6 @@
 ﻿@using BookStore.Models
 @using BookStore.Web
 
-<head>
-    <script src="~/Content/Scripts/LoadPageBooks.js"></script>
-</head>
-
-
 <div class="container">
     @foreach (Book book in ((List<Book>) ViewData[DataKeys.Books]) )
     {
@@ -13,32 +8,3 @@
     }
 </div>
 
-<div align="center">
-    <ul class="pagination">
-        @for (int pageNo = 1; pageNo <= ((int)ViewData[DataKeys.BooksPageNumbers]); pageNo++)
-        {
-            if (pageNo == (int)ViewData[DataKeys.CurrentPage])
-            {
-                <li class="active">
-                    <a href="#">@pageNo</a>
-                </li>
-            }
-            else
-            {
-                <li>
-                    @{
-                        string searchTerm = (string)ViewData[DataKeys.SearchTerm];
-                        if (searchTerm != null && searchTerm.Trim() != "")
-                        {
-                            <a onclick="LoadPageBooks('@searchTerm', @pageNo)">@pageNo</a>
-                        }
-                        else
-                        {
-                            <a onclick="LoadPageBooks('', @pageNo)">@pageNo</a>
-                        }
-                    }
-                </li>
-            }
-        }
-    </ul>
-</div>
